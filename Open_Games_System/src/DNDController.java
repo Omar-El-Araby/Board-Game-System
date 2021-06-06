@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.awt.event.ActionEvent;
 
 public class DNDController {
-    Token test = new Token(0,0,new Image("file:src/assets/O.png"));
+    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
     BattleMap map = new BattleMap();
     Canvas canvas = new Canvas(Main.resolutionX,Main.resolutionY);
     GraphicsContext gc = canvas.getGraphicsContext2D();

@@ -25,9 +25,9 @@ public class Controller {
     GraphicsContext gc = canvas.getGraphicsContext2D();
     Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
     boolean playerFlag = true;
-    Token test = new Token(0,0,new Image("file:src/assets/O.png"));
+    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
+    DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
     BattleMap map = new BattleMap();
-
     @FXML
     public void initialize() {
 
@@ -39,22 +39,48 @@ public class Controller {
         test.setFitWidth(Main.resolutionX/10);
         test.setFitHeight(Main.resolutionY/10);
         test.setPosition(map.getTile(4,4));
+        test1.setFitWidth(Main.resolutionX/10);
+        test1.setFitHeight(Main.resolutionY/10);
+        test1.setPosition(map.getTile(4,4));
+        test1.toggleSelect();
         MovementDND mover = new MovementDND(test);
-        System.out.println("X: "+test.getX()+"\tY: "+test.getY());
+        MovementDND mover1 = new MovementDND(test1);
+        System.out.println("circX: "+test.getX()+"\tcircY: "+test.getY());
+        System.out.println("crossX: "+test1.getX()+"\tcrossY: "+test1.getY());
         EventHandler<KeyEvent> movent = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.getCharacter().charAt(0) == 'w')
+                if(event.getCharacter().charAt(0) == 'w'){
+                    System.out.printf("token: %b\ttoken1: %b\n",test.checkMaxMovement(),test1.checkMaxMovement());
                     mover.moveUp();
-                else if(event.getCharacter().charAt(0) == 's')
+                    mover1.moveUp();
+                }
+                else if(event.getCharacter().charAt(0) == 's') {
                     mover.moveDown();
-                else if(event.getCharacter().charAt(0) == 'a')
+                    mover1.moveDown();
+                }
+                else if(event.getCharacter().charAt(0) == 'a') {
                     mover.moveLeft();
-                else if(event.getCharacter().charAt(0) == 'd')
+                    mover1.moveLeft();
+                }
+                else if(event.getCharacter().charAt(0) == 'd') {
                     mover.moveRight();
+                    mover1.moveRight();
+                }
+                else if(event.getCharacter().charAt(0) == ' ')
+                {
+                    test1.toggleSelect();
+                    test.toggleSelect();
+                }
+                else if(event.getCharacter().charAt(0) == 'p'){
+                    test.resetMovement();
+                    test1.resetMovement();
+                }
             }
         };
-        Thread animation = new Thread(new Animator(gc, bg, test,mover));
+
+        //Thread animation = new Thread(new Animator(gc, bg, test,mover));
+        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1));
         animation.start();
         Group root = new Group(canvas);
         Scene scene = new Scene(root);

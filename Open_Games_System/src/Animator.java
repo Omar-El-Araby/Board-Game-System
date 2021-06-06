@@ -38,6 +38,6 @@ public class Animator implements Runnable{
     }
     @Override
     public void run() {
-        ani2.start();
+        ani1.start();
     }
 }

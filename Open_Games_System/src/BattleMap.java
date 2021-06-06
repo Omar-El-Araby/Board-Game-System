@@ -1,6 +1,6 @@
 public class BattleMap extends Grid{
-    private static int x = 10; //all movements that use battlemap should have the same grid
-    private static int y = 10;
+    private static int x = 100; //all movements that use battlemap should have the same grid
+    private static int y = 100;
     private int[] position = {4,4}/*new int[2]*/;
     public BattleMap(){
         super.tiles = new Tile[x][y];
@@ -52,24 +52,24 @@ public class BattleMap extends Grid{
         if(position[1]+inc < y && position[1]+inc >= 0)position[1] += inc;
     }
     public void moveTileUp(){
-        System.out.printf("pre-PositionY: %d\t",position[1]);
+        //System.out.printf("pre-PositionY: %d\t",position[1]);
         moveTileY(-1);
-        System.out.printf("post-PositionY: %d\t",position[1]);
+        //System.out.printf("post-PositionY: %d\t",position[1]);
     }
     public void moveTileDown(){
-        System.out.printf("pre-PositionY: %d\t",position[1]);
+        //System.out.printf("pre-PositionY: %d\t",position[1]);
         moveTileY(1);
-        System.out.printf("post-PositionY: %d\t",position[1]);
+        //System.out.printf("post-PositionY: %d\t",position[1]);
     }
     public void moveTileLeft(){ //correct
-        System.out.printf("pre-PositionX: %d\t",position[0]);
+        //System.out.printf("pre-PositionX: %d\t",position[0]);
         moveTileX(-1);
-        System.out.printf("post-PositionX: %d\t",position[0]);
+        //System.out.printf("post-PositionX: %d\t",position[0]);
     }
     public void moveTileRight(){ //correct
-        System.out.printf("pre-PositionX: %d\t",position[0]);
+        //System.out.printf("pre-PositionX: %d\t",position[0]);
         moveTileX(1);
-        System.out.printf("post-PositionX: %d\t",position[0]);
+        //System.out.printf("post-PositionX: %d\t",position[0]);
     }
     public static void main(String[] args) {
         BattleMap map = new BattleMap(1920,1080);
