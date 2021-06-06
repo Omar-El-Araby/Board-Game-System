@@ -12,25 +12,23 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.web.WebView;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.util.Scanner;
 
 public class Main extends Application {
-    static public int resolution = 800;
+//    static public double resolutionX = Screen.getPrimary().getBounds().getMaxX() * 0.7;
+//    static public double resolutionY = Screen.getPrimary().getBounds().getMaxY() * 0.7;
+    static public double resolutionX = 800;
+    static public double resolutionY = 800;
     static public Stage mainStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //JSONArray array = new JSONArray();
-       // WebView webView = new WebView();
-
         mainStage = primaryStage;
         mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setResizable(false);
