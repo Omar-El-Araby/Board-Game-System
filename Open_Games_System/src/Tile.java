@@ -1,7 +1,8 @@
 public class Tile {
     private int x;
     private int y;
-    private String type;
+    protected String type;
+    private String prompt;
     private int position;
     protected boolean occupied = false;
     public int getX() {
@@ -14,6 +15,14 @@ public class Tile {
     public int getPosition() {
         toggleOccupation();
         return position;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
     }
 
     public void setPosition(int position) {
@@ -31,6 +40,12 @@ public class Tile {
         this.type = type;
     }
     public Tile(){
+        type = "default";
+    }
+    public Tile(int x, int y){
+        this.x = x;
+        this.y = y;
+        type = "default";
     }
     public Tile(int x, int y, int position){
         type = "default";
@@ -44,5 +59,12 @@ public class Tile {
         type = tile.type;
         position = tile.position;
         occupied = tile.occupied;
+    }
+    public Tile(int x, int y,int position, String prompt){
+        type = "default";
+        this.x = x;
+        this.y = y;
+        this.position = position;
+        this.prompt = prompt;
     }
 }

@@ -29,6 +29,9 @@ public abstract class Movement {
     public void setIncrementY(double incrementY){this.incrementY = incrementY;}
     public Movement(){}
     public  Movement(Token token){
+        setPosition(token);
+    }
+    public void setPosition(Token token){
         currX = token.getX();
         currY = token.getY();
         toX = token.getX();

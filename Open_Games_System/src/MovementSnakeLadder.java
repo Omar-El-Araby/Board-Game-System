@@ -3,7 +3,7 @@ public class MovementSnakeLadder extends Movement{
 //    public boolean reverseflagY = true;
 //    public int limitX;
 //    public int limitY;
-
+    public MovementSnakeLadder(){}
     public MovementSnakeLadder(Token token){
         super(token);
 
