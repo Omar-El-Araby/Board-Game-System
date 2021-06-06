@@ -4,7 +4,7 @@ import java.util.Random;
 public abstract class Grid extends Pane{
     protected int x;
     protected int y;
-    private Tile[][] tiles;
+    protected Tile[][] tiles;
     public int getX() {
         return x;
     }
@@ -15,7 +15,7 @@ public abstract class Grid extends Pane{
     public Tile getTile(int x, int y){
         return tiles[x][y];
     }
-    public abstract void populateTiles(int height, int width);/*{
+    public abstract void populateTiles(double height, double width);/*{
         int n = 0;
         int m = 0;
         for (int i = 0; i<x ; i++,n+= width/x, m=0)

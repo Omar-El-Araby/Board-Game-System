@@ -18,30 +18,88 @@ import java.io.FileInputStream;
 public class Controller {
     Token playerO = new Token(0,0,new Image("file:src/assets/O.png"));
     Token playerX = new Token(0,0,new Image("file:src/assets/X.png"));
-    SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolution,Main.resolution);
-    SnakeLadderGrid gridX = new SnakeLadderGrid(10,10,Main.resolution,Main.resolution);
-    Canvas canvas = new Canvas(Main.resolution,Main.resolution);
+    SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
+    SnakeLadderGrid gridX = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
+    Canvas canvas = new Canvas(Main.resolutionX,Main.resolutionY);
 //    MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
     GraphicsContext gc = canvas.getGraphicsContext2D();
     Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
     boolean playerFlag = true;
-
+    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
+    DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
+    BattleMap map = new BattleMap();
     @FXML
     public void initialize() {
 
     }
 
+    public void DND(ActionEvent actionEvent){
+        Main.mainStage.hide();
+        Stage DNDStage = new Stage();
+        test.setFitWidth(Main.resolutionX/10);
+        test.setFitHeight(Main.resolutionY/10);
+        test.setPosition(map.getTile(4,4));
+        test1.setFitWidth(Main.resolutionX/10);
+        test1.setFitHeight(Main.resolutionY/10);
+        test1.setPosition(map.getTile(4,4));
+        test1.toggleSelect();
+        MovementDND mover = new MovementDND(test);
+        MovementDND mover1 = new MovementDND(test1);
+        System.out.println("circX: "+test.getX()+"\tcircY: "+test.getY());
+        System.out.println("crossX: "+test1.getX()+"\tcrossY: "+test1.getY());
+        EventHandler<KeyEvent> movent = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCharacter().charAt(0) == 'w'){
+                    System.out.printf("token: %b\ttoken1: %b\n",test.checkMaxMovement(),test1.checkMaxMovement());
+                    mover.moveUp();
+                    mover1.moveUp();
+                }
+                else if(event.getCharacter().charAt(0) == 's') {
+                    mover.moveDown();
+                    mover1.moveDown();
+                }
+                else if(event.getCharacter().charAt(0) == 'a') {
+                    mover.moveLeft();
+                    mover1.moveLeft();
+                }
+                else if(event.getCharacter().charAt(0) == 'd') {
+                    mover.moveRight();
+                    mover1.moveRight();
+                }
+                else if(event.getCharacter().charAt(0) == ' ')
+                {
+                    test1.toggleSelect();
+                    test.toggleSelect();
+                }
+                else if(event.getCharacter().charAt(0) == 'p'){
+                    test.resetMovement();
+                    test1.resetMovement();
+                }
+            }
+        };
+
+        //Thread animation = new Thread(new Animator(gc, bg, test,mover));
+        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1));
+        animation.start();
+        Group root = new Group(canvas);
+        Scene scene = new Scene(root);
+        scene.addEventHandler(KeyEvent.KEY_TYPED, movent);
+        DNDStage.setTitle("Main Menu");
+        DNDStage.setScene(scene);
+        DNDStage.show();
+    }
 
 
     public void snek(ActionEvent actionEvent) {
         Main.mainStage.hide();
         Stage snekStage = new Stage();
 
-        playerO.setFitWidth((double) Main.resolution/10);
-        playerO.setFitHeight((double) Main.resolution/10);
+        playerO.setFitWidth(Main.resolutionX/10);
+        playerO.setFitHeight(Main.resolutionY/10);
         playerO.setPosition(gridO.getTile(0));
-        playerX.setFitWidth((double) Main.resolution/10);
-        playerX.setFitHeight((double) Main.resolution/10);
+        playerX.setFitWidth( Main.resolutionX/10);
+        playerX.setFitHeight( Main.resolutionY/10);
         playerX.setPosition(gridO.getTile(0));
         MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
         MovementSnakeLadder suffering = new MovementSnakeLadder(playerX);
