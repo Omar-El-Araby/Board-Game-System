@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#bgOnMouseDragged" onMousePressed="#bgOnMousePressed" prefHeight="400.0" prefWidth="251.0" styleClass="mainmenubg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <Button layoutX="51.0" layoutY="97.0" mnemonicParsing="false" onAction="#snek" prefHeight="44.0" prefWidth="149.0" styleClass="mainmenubutton" stylesheets="@style.css" text="Snakes and Ladders" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="14.0" />
+         </font></Button>
+      <Button layoutX="51.0" layoutY="153.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="149.0" styleClass="mainmenubutton" stylesheets="@style.css" text="DnD" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="15.0" />
+         </font></Button>
+      <Button layoutX="51.0" layoutY="206.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="149.0" styleClass="mainmenubutton" stylesheets="@style.css" text="Surprise ;)" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="15.0" />
+         </font></Button>
+      <Button layoutX="51.0" layoutY="259.0" mnemonicParsing="false" onAction="#mainExit" prefHeight="44.0" prefWidth="149.0" styleClass="mainmenubutton" stylesheets="@style.css" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="15.0" />
+         </font></Button>
+      <Label layoutX="6.0" layoutY="29.0" prefHeight="51.0" prefWidth="245.0" text="Board Of Doom" textFill="#b156e7">
+         <font>
+            <Font name="Old English Text MT" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

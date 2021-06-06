@@ -71,7 +71,7 @@ public class Controller {
                     //pain.moveRight();
 
                  if(event.getCharacter().charAt(0) == ' ') {
-                     int roll = Dice.roll(6) + 1;
+                     int roll = Dice.roll(6);
                      if(playerFlag) {
                          gridO.toggleFutureTile(roll);
                          for(int i = 0; i < roll; ++i) {
