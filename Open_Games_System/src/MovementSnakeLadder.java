@@ -52,21 +52,21 @@ public class MovementSnakeLadder extends Movement{
     }*/
     public void moveUp() {
         if(currY > 0)
-            currY = currY - getIncrement();
+            currY = currY - getIncrementY();
     }
     public void moveDown() {
-        if(currY < Main.resolutionX - getIncrement())
-            currY = currY + getIncrement();
+        if(currY < Main.resolutionY - getIncrementY())
+            currY = currY + getIncrementY();
     }
     public void moveRight() {
-        if(currX < Main.resolutionY - getIncrement())
-            currX = currX + getIncrement();
+        if(currX < Main.resolutionX - getIncrementX())
+            currX = currX + getIncrementX();
 //        toX += 80;
 //        Main.wait(150);
     }
     public void moveLeft() {
         if(currX > 0)
-            currX = currX - getIncrement();
+            currX = currX - getIncrementX();
     }
     public void nextTile(Tile tile) {
         this.toX = tile.getX();
