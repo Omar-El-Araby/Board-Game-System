@@ -28,6 +28,8 @@ public abstract class Movement {
     public  Movement(Token token){
         currX = token.getX();
         currY = token.getY();
+        toX = token.getX();
+        toY = token.getY();
     }
     public double moveX(){
         if(currX < toX)

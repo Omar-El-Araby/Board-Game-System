@@ -6,8 +6,7 @@ public class MovementSnakeLadder extends Movement{
 
     public MovementSnakeLadder(Token token){
         super(token);
-        this.toX = token.getX();
-        this.toY = token.getY();
+
 //        toggleX = false;
 //        toggleY = true;
     }
@@ -56,11 +55,11 @@ public class MovementSnakeLadder extends Movement{
             currY = currY - getIncrement();
     }
     public void moveDown() {
-        if(currY < Main.resolution - getIncrement())
+        if(currY < Main.resolutionX - getIncrement())
             currY = currY + getIncrement();
     }
     public void moveRight() {
-        if(currX < Main.resolution - getIncrement())
+        if(currX < Main.resolutionY - getIncrement())
             currX = currX + getIncrement();
 //        toX += 80;
 //        Main.wait(150);
