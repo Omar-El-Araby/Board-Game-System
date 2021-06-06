@@ -18,30 +18,62 @@ import java.io.FileInputStream;
 public class Controller {
     Token playerO = new Token(0,0,new Image("file:src/assets/O.png"));
     Token playerX = new Token(0,0,new Image("file:src/assets/X.png"));
-    SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolution,Main.resolution);
-    SnakeLadderGrid gridX = new SnakeLadderGrid(10,10,Main.resolution,Main.resolution);
-    Canvas canvas = new Canvas(Main.resolution,Main.resolution);
+    SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
+    SnakeLadderGrid gridX = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
+    Canvas canvas = new Canvas(Main.resolutionX,Main.resolutionY);
 //    MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
     GraphicsContext gc = canvas.getGraphicsContext2D();
     Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
     boolean playerFlag = true;
+    Token test = new Token(0,0,new Image("file:src/assets/O.png"));
+    BattleMap map = new BattleMap();
 
     @FXML
     public void initialize() {
 
     }
 
+    public void DND(ActionEvent actionEvent){
+        Main.mainStage.hide();
+        Stage DNDStage = new Stage();
+        test.setFitWidth(Main.resolutionX/10);
+        test.setFitHeight(Main.resolutionY/10);
+        test.setPosition(map.getTile(4,4));
+        MovementDND mover = new MovementDND(test);
+        System.out.println("X: "+test.getX()+"\tY: "+test.getY());
+        EventHandler<KeyEvent> movent = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCharacter().charAt(0) == 'w')
+                    mover.moveUp();
+                else if(event.getCharacter().charAt(0) == 's')
+                    mover.moveDown();
+                else if(event.getCharacter().charAt(0) == 'a')
+                    mover.moveLeft();
+                else if(event.getCharacter().charAt(0) == 'd')
+                    mover.moveRight();
+            }
+        };
+        Thread animation = new Thread(new Animator(gc, bg, test,mover));
+        animation.start();
+        Group root = new Group(canvas);
+        Scene scene = new Scene(root);
+        scene.addEventHandler(KeyEvent.KEY_TYPED, movent);
+        DNDStage.setTitle("Main Menu");
+        DNDStage.setScene(scene);
+        DNDStage.show();
+    }
 
 
     public void snek(ActionEvent actionEvent) {
         Main.mainStage.hide();
         Stage snekStage = new Stage();
 
-        playerO.setFitWidth((double) Main.resolution/10);
-        playerO.setFitHeight((double) Main.resolution/10);
+        playerO.setFitWidth(Main.resolutionX/10);
+        playerO.setFitHeight(Main.resolutionY/10);
         playerO.setPosition(gridO.getTile(0));
-        playerX.setFitWidth((double) Main.resolution/10);
-        playerX.setFitHeight((double) Main.resolution/10);
+        playerX.setFitWidth( Main.resolutionX/10);
+        playerX.setFitHeight( Main.resolutionY/10);
         playerX.setPosition(gridO.getTile(0));
         MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
         MovementSnakeLadder suffering = new MovementSnakeLadder(playerX);

@@ -12,6 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -20,7 +21,10 @@ import java.io.FileInputStream;
 import java.util.Scanner;
 
 public class Main extends Application {
-    static public int resolution = 800;
+    /*static public double resolutionX = Screen.getPrimary().getBounds().getMaxX();
+    static public double resolutionY = Screen.getPrimary().getBounds().getMaxY();*/
+    static public double resolutionX = 1000;
+    static public double resolutionY = 1000;
     static public Stage mainStage;
 
     @Override
