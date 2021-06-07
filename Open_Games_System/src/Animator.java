@@ -13,6 +13,15 @@ public class Animator implements Runnable{
             gc.drawImage(bg,0,0, Main.resolutionX, Main.resolutionY);
             gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
             gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
+<<<<<<< Updated upstream
+=======
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.println("running");
+>>>>>>> Stashed changes
         }
     };
     AnimationTimer ani2 = new AnimationTimer() {

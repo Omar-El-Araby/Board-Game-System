@@ -31,6 +31,10 @@ public class Controller {
 
     public Controller() throws Exception {
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
     @FXML
     public void initialize() {
@@ -132,12 +136,112 @@ public class Controller {
              //   else if(event.getCharacter().charAt(0) == 'd')
                     //pain.moveRight();
 
+<<<<<<< Updated upstream
                  if(event.getCharacter().charAt(0) == ' ') {
                      int roll = Dice.roll(6);
                      if(playerFlag) {
                          gridO.toggleFutureTile(roll);
                          for(int i = 0; i < roll; ++i) {
                              pain.nextTile(gridO.nextPosition());
+=======
+                if(singlePlayer) {
+                    boolean flag = true;
+                    if(event.getCharacter().charAt(0) == ' ') {
+                        int roll = Dice.roll(6);
+                        if(gridO.getPosition()+roll>99)
+                        {
+                            JOptionPane.showMessageDialog(null,
+                                    roll,
+                                    "Your Roll",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null,
+                                    "You won!!",
+                                    "Congratulations",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            Main.mainStage.show();
+                            User.incrementWin();
+                            snekStage.close();
+                            flag = false;
+                            return;
+                        }
+                        JOptionPane.showMessageDialog(null,
+                                roll,
+                                "Your Roll",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        gridO.toggleFutureTile(roll);
+                        for(int i = 0; i < roll; ++i) {
+                            pain.nextTile(gridO.nextPosition());
+//                             try {
+//                                 Thread.sleep(150);
+//                             } catch (InterruptedException e) {
+//                                 e.printStackTrace();
+//                             }
+                        }
+                        if(gridO.getPosition() == 99) {
+                            JOptionPane.showMessageDialog(null,
+                                    "You won!!",
+                                    "Congratulations",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            Main.mainStage.show();
+                            User.incrementWin();
+                            snekStage.close();
+                            flag = false;
+                        }
+                        if(flag) {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            roll = Dice.roll(6);
+                            if(gridX.getPosition()+roll>99)
+                            {   JOptionPane.showMessageDialog(null,
+                                    roll,
+                                    "CPU Roll",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null,
+                                        "Computer won!!",
+                                        "Congratulations",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                Main.mainStage.show();
+                                User.incrementWin();
+                                snekStage.close();
+                                flag = false;
+                                return;
+                            }
+                            JOptionPane.showMessageDialog(null,
+                                    roll,
+                                    "CPU Roll",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            gridX.toggleFutureTile(roll);
+                            for(int i = 0; i < roll; ++i) {
+                                suffering.nextTile(gridX.nextPosition());
+//                             try {
+//                                 Thread.sleep(150);
+//                             } catch (InterruptedException e) {
+//                                 e.printStackTrace();
+//                             }
+                            }
+                            if(gridX.getPosition() == 99) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Computer wins!!",
+                                        "Sadness ensues",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                Main.mainStage.show();
+                                User.incrementLoss();
+                                snekStage.close();
+                            }
+                        }
+                    }
+                }
+                else {
+                    if(event.getCharacter().charAt(0) == ' ') {
+                        int roll = Dice.roll(6);
+                        if(playerFlag) {
+                            gridO.toggleFutureTile(roll);
+                            for(int i = 0; i < roll; ++i) {
+                                pain.nextTile(gridO.nextPosition());
+>>>>>>> Stashed changes
 //                             try {
 //                                 Thread.sleep(150);
 //                             } catch (InterruptedException e) {
