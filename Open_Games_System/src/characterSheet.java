@@ -12,21 +12,18 @@ public class characterSheet implements Sheet {
     private Integer[] valueStoredForStat= new Integer[Main_Stats.length];
     private Integer[] statMod = new Integer[Main_Stats.length];
     private Integer playerLevel;
+    String currentFileLocation;
     public characterSheet(){}
-    public characterSheet (String playerName,Integer[] Stat_Value,Integer playerLevel) throws Exception {
+    public characterSheet (String playerName,Integer[] Stat_Value,Integer playerLevel, String currentFileLocation){
         this.playerName=playerName;
         this.playerLevel=playerLevel;
         valueStoredForStat=Stat_Value;
+        this.currentFileLocation = currentFileLocation;
         store();
     }
     @Override
     public void store() {
         try {
-
-            String currentFileLocation = "file:src/stats/charactersheet.json";
-
-
-
 
             JSONObject States = new JSONObject();
             File file = new File(currentFileLocation);
@@ -61,9 +58,9 @@ public class characterSheet implements Sheet {
     }
 
     public static void main(String[] args) throws Exception {
-        characterSheet pl = new characterSheet("Dragonborn",new Integer[]{3,4,8,5,1,100},1);
-
-        //characterSheet temp = new characterSheet();
+        characterSheet pl = new characterSheet("Dragonborn",new Integer[]{3,4,8,5,1,100},1,"src/stats/charactersheet.json");
+        System.out.println(pl.getStatMod()[0]);
+        characterSheet temp = new characterSheet();
     }
     public void update()
     {
@@ -84,7 +81,12 @@ public class characterSheet implements Sheet {
     public Integer[] getStatMod() {
         return statMod;
     }
-
+    public int getHP(){
+        return valueStoredForStat[5];
+    }
+    public void changeHP(int n){
+        valueStoredForStat[5] += n;
+    }
     public String getPlayerName() {
         return playerName;
     }

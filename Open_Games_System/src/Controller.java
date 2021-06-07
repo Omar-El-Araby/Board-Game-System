@@ -39,8 +39,11 @@ public class Controller {
 
     boolean playerFlag = true;
     boolean singlePlayer = true;
-    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
-    DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
+    DNDToken[] gamer = new DNDToken[10];//= new DNDToken(0,0,new Image("file:src/assets/O.png"));
+    MovementDND[] mover = new MovementDND[10];
+    int selectedToken = 0;
+    int limit = 2;
+    // DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
     BattleMap map = new BattleMap();
 
 
@@ -63,62 +66,64 @@ public class Controller {
 
     public void DND(ActionEvent actionEvent){
         Image bg = new Image("file:src/assets/The_green_way.png");
+        gamer[0] = new DNDToken(0,0,new Image("file:src/assets/O.png"));
+        gamer[1] = new DNDToken(0,0,new Image("file:src/assets/X.png"));
+        gamer[0].setPos(5,15);
+        gamer[1].setPos(22,19);
         Main.mainStage.hide();
         Stage DNDStage = new Stage();
-        test.setFitWidth(Main.width);
-        test.setFitHeight(Main.height);
-        test.setPosition(map.getTile(4,4));
-        test1.setFitWidth(Main.width);
-        test1.setFitHeight(Main.height);
-        test1.setPosition(map.getTile(4,4));
-        test1.toggleSelect();
-        MovementDND mover = new MovementDND(test);
-        MovementDND mover1 = new MovementDND(test1);
+        gamer[0].setFitWidth(Main.width);
+        gamer[0].setFitHeight(Main.height);
+        gamer[0].setPosition(map.getTile(gamer[0].getPosX(),gamer[0].getPosY()));
+        gamer[1].setFitWidth(Main.width);
+        gamer[1].setFitHeight(Main.height);
+        gamer[1].setPosition(map.getTile(gamer[1].getPosX(),gamer[1].getPosY()));
+        //gamer[1].toggleSelect();
+        mover[0] = new MovementDND(gamer[0]);
+        mover[1] = new MovementDND(gamer[1]);
         //System.out.println("circX: "+test.getX()+"\tcircY: "+test.getY());
         //System.out.println("crossX: "+test1.getX()+"\tcrossY: "+test1.getY());
+
+        EventHandler<KeyEvent> movent = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCharacter().charAt(0) == ' ')
+                {
+                    System.out.println(selectedToken);
+                    selectedToken++;
+                    if(selectedToken == limit)selectedToken=0;
+
+                    System.out.println(selectedToken);
+                }
+                else if(event.getCharacter().charAt(0) == 'w'){
+                    mover[selectedToken].moveUp();
+                }
+                else if(event.getCharacter().charAt(0) == 's') {
+                    mover[selectedToken].moveDown();
+                }
+                else if(event.getCharacter().charAt(0) == 'a') {
+                    mover[selectedToken].moveLeft();
+                }
+                else if(event.getCharacter().charAt(0) == 'd') {
+                    mover[selectedToken].moveRight();
+                }
+
+                else if(event.getCharacter().charAt(0) == 'p'){
+                    for(int i = 0; i< limit ; i++)gamer[0].resetMovement();
+                }
+            }
+        };
         canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 MouseMonitor.getPos(event);
                 //System.out.printf("tileX : %d\n",MouseMonitor.calcX());
                 //System.out.printf("tileY : %d\n",MouseMonitor.calcY());
-                mover.moveTo(map.getTile(MouseMonitor.calcX(),MouseMonitor.calcY()));
+                mover[selectedToken].moveTo(map.getTile(MouseMonitor.calcX(),MouseMonitor.calcY()));
             }
         });
-        EventHandler<KeyEvent> movent = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if(event.getCharacter().charAt(0) == 'w'){
-                    System.out.printf("token: %b\ttoken1: %b\n",test.checkMaxMovement(),test1.checkMaxMovement());
-                    mover.moveUp();
-                    mover1.moveUp();
-                }
-                else if(event.getCharacter().charAt(0) == 's') {
-                    mover.moveDown();
-                    mover1.moveDown();
-                }
-                else if(event.getCharacter().charAt(0) == 'a') {
-                    mover.moveLeft();
-                    mover1.moveLeft();
-                }
-                else if(event.getCharacter().charAt(0) == 'd') {
-                    mover.moveRight();
-                    mover1.moveRight();
-                }
-                else if(event.getCharacter().charAt(0) == ' ')
-                {
-                    test1.toggleSelect();
-                    test.toggleSelect();
-                }
-                else if(event.getCharacter().charAt(0) == 'p'){
-                    test.resetMovement();
-                    test1.resetMovement();
-                }
-            }
-        };
-
         //Thread animation = new Thread(new Animator(gc, bg, test,mover));
-        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1));
+        Thread animation = new Thread(new Animator(gc, bg, gamer[0], gamer[1], mover[0], mover[1]));
         animation.start();
         Group root = new Group(canvas);
         Scene scene = new Scene(root);
