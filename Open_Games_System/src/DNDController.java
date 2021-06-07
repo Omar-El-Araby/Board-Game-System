@@ -19,8 +19,8 @@ public class DNDController {
     public void DND(ActionEvent actionEvent){
         Main.mainStage.hide();
         Stage DNDStage = new Stage();
-        test.setFitWidth(Main.resolutionX/10);
-        test.setFitHeight(Main.resolutionY/10);
+        test.setFitWidth(Main.width);
+        test.setFitHeight(Main.height);
         test.setPosition(map.getTile(4,4));
         MovementDND mover = new MovementDND(test);
         System.out.println("X: "+test.getX()+"\tY: "+test.getY());

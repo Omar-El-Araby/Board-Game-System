@@ -1,7 +1,7 @@
 public class MovementDND extends Movement{
     private DNDToken token; //took the entire token instead of its position to potentially apply status effects.
     private BattleMap map = new BattleMap();
-
+    private int[] position = {4,4};
     public MovementDND(){}
     public MovementDND(DNDToken token){
         super(token);
@@ -45,6 +45,7 @@ public class MovementDND extends Movement{
         }
         //System.out.printf("X: %d\tY: %d\n",map.getPositionX(),map.getPositionY());
     }
+
     public boolean checkSurroundings(String type){
         for(int i = -1;i<2;i++){
             for(int j = -1; j < 2; j++){

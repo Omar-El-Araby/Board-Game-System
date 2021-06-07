@@ -23,8 +23,12 @@ import java.util.Scanner;
 public class Main extends Application {
 //    static public double resolutionX = Screen.getPrimary().getBounds().getMaxX() * 0.7;
 //    static public double resolutionY = Screen.getPrimary().getBounds().getMaxY() * 0.7;
+    static public int divX = 25;
+    static public int divY = 25;
     static public double resolutionX = 800;
     static public double resolutionY = 800;
+    static public double width = resolutionX/divX;
+    static public double height = resolutionY/divY;
     static public Stage mainStage;
 
     @Override

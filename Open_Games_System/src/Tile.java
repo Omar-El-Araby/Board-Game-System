@@ -4,6 +4,7 @@ public class Tile {
     protected String type;
     private String prompt;
     private int position;
+    private Token occupier;
     protected boolean occupied = false;
     public int getX() {
         return x;
@@ -11,10 +12,17 @@ public class Tile {
     public int getY() {
         return y;
     }
-
     public int getPosition() {
         toggleOccupation();
         return position;
+    }
+
+    public Token getOccupier() {
+        return occupier;
+    }
+
+    public void setOccupier(Token occupier) {
+        this.occupier = occupier;
     }
 
     public String getPrompt() {
@@ -38,6 +46,10 @@ public class Tile {
     }
     public void setType(String type) {
         this.type = type;
+    }
+    public void moveToken(Tile tile){
+        tile.setOccupier(occupier);
+        occupier = null;
     }
     public Tile(){
         type = "default";

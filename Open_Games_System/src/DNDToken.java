@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 public class DNDToken extends Token {
     private boolean selected = true;
     private boolean movable = true;
-    double maxMovement = 30; //30 tiles ?
+    double maxMovement = 6; //6 tiles * 5ft = 30, the average movement.
     private double currMovement = 0;
     String status;
     public DNDToken(int x, int y, Image img){
@@ -11,8 +11,7 @@ public class DNDToken extends Token {
 
     }
     public boolean canMove(){
-        if(selected && movable)return true;
-        return false;
+        return (selected && movable);
     }
     public void toggleSelect(){
         System.out.println("select toggled to :" + !selected);
@@ -23,11 +22,13 @@ public class DNDToken extends Token {
     }
     public boolean checkMaxMovement(){
         System.out.println(currMovement);
-        if(currMovement< maxMovement && selected) {
+        if(currMovement < maxMovement && selected) {
             currMovement++;
-            return true;
+            movable = true;
+            return movable;
         }
-        //System.out.println("Max movement reached");
-        return false;
+        System.out.println("Max movement reached");
+        movable = false;
+        return movable;
     }
 }
