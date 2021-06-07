@@ -38,16 +38,16 @@ public abstract class Movement {
         toY = token.getY();
     }
     public double moveX(){
-        if(currX < toX)
+        if(currX < toX - incrementX)
             currX += incrementX;
-        else if(currX > toX)
+        else if(currX > toX + incrementX)
             currX -= incrementX;
         return currX;
     }
     public double moveY(){
-        if(currY < toY )
+        if(currY < toY - incrementY)
             currY += incrementY;
-        else if(currY > toY)
+        else if(currY > toY + incrementY)
             currY -= incrementY;
         return currY;
     }
