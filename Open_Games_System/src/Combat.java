@@ -33,12 +33,13 @@ public final class Combat {
             damage = 0;
             rolls= "Damage roll = ";
             attackString = null;
-            if((attacker.getX() - attacked.getX()) < 2*Main.width || (attacker.getY() - attacked.getY()) < 2*Main.height) {
+
+            if(attacked.getSheet().getHP() > 0) {
                 AttemptAttack(attacker.getSheet(), attacked.getSheet());
                 attacked.getSheet().changeHP(-damage);
                 return attackString + rolls;
             }
-            else return "Target too far away";
+            else return "Target is dead";
 
 
         }

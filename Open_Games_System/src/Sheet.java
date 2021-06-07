@@ -7,7 +7,7 @@ public interface Sheet {
     Hashtable<String,Integer> Stats= new Hashtable<>();
     Integer[] defaultValues={0,0,0,0,0,0};
     JSONObject writeData = new JSONObject();
-    void read() throws Exception ;
+    void read(String location) throws Exception ;
     void store() throws Exception;
     void update();
 }

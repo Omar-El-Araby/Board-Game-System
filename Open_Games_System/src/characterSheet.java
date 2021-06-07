@@ -21,6 +21,14 @@ public class characterSheet implements Sheet {
         this.currentFileLocation = currentFileLocation;
         store();
     }
+    public characterSheet(String location){
+        try{
+            read(location);
+        }
+        catch (Exception e){
+            System.out.println("file not found.");
+        }
+    }
     @Override
     public void store() {
         try {
@@ -46,14 +54,16 @@ public class characterSheet implements Sheet {
         }
     }
     @Override
-    public void read() throws Exception {
-        String File = new String(Files.readAllBytes(Paths.get("charactersheet.json")));
+    public void read(String location) throws Exception {
+        String File = new String(Files.readAllBytes(Paths.get(location)));
         JSONObject temp = new JSONObject(File);
         playerName=temp.getString("playerName");
         playerLevel=temp.getInt("Level");
         JSONObject t =temp.getJSONObject("Stats");
-        for(int i=0;i<valueStoredForStat.length;i++)
-            valueStoredForStat[i]=t.getInt(Main_Stats[i]);
+        for(int i=0;i<valueStoredForStat.length;i++) {
+            valueStoredForStat[i] = t.getInt(Main_Stats[i]);
+            statMod[i] = setMod(valueStoredForStat[i]);
+        }
 
     }
 

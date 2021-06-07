@@ -43,6 +43,7 @@ public class Controller {
     DNDToken[] gamer = new DNDToken[10];//= new DNDToken(0,0,new Image("file:src/assets/O.png"));
     MovementDND[] mover = new MovementDND[10];
     int selectedToken = 0;
+    int notSelected =1 ;
     int limit = 2;
     // DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
 
@@ -71,8 +72,8 @@ public class Controller {
 
     public void DND(ActionEvent actionEvent){
         Image bg = new Image("file:src/assets/The_green_way.png");
-        gamer[0] = new DNDToken(0,0,new Image("file:src/assets/knight.png"));
-        gamer[1] = new DNDToken(0,0,new Image("file:src/assets/direwolf.png"));
+        gamer[0] = new DNDToken(0,0,new Image("file:src/assets/knight.png"),new characterSheet("src/stats/paladin.json"));
+        gamer[1] = new DNDToken(0,0,new Image("file:src/assets/direwolf.png"),new characterSheet("src/stats/direwolf.json"));
         gamer[0].setPos(5,15);
         gamer[1].setPos(22,19);
         Main.mainStage.hide();
@@ -96,7 +97,11 @@ public class Controller {
                 {
                     System.out.println(selectedToken);
                     selectedToken++;
-                    if(selectedToken == limit)selectedToken=0;
+                    notSelected--;
+                    if(selectedToken == limit){
+                        selectedToken=0;
+                        notSelected=1;
+                    }
 
                     System.out.println(selectedToken);
                 }
@@ -112,7 +117,13 @@ public class Controller {
                 else if(event.getCharacter().charAt(0) == 'd') {
                     mover[selectedToken].moveRight();
                 }
-
+                else if(event.getCharacter().charAt(0) == 'f'){
+                    JOptionPane.showMessageDialog(null,
+                            Combat.Weapon.Attack(gamer[selectedToken],gamer[notSelected]),
+                            "Your Roll",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    //System.out.println(Combat.Weapon.Attack(gamer[selectedToken],gamer[notSelected]));
+                }
                 else if(event.getCharacter().charAt(0) == 'p'){
                     for(int i = 0; i< limit ; i++)gamer[0].resetMovement();
                 }

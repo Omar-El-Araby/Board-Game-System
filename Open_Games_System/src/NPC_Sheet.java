@@ -2,7 +2,7 @@ public class NPC_Sheet implements Sheet{
     public NPC_Sheet(){}
 
     @Override
-    public void read() {
+    public void read(String location) {
 
     }
 
