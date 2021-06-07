@@ -171,7 +171,23 @@ public class Controller {
                     boolean flag = true;
                     if(event.getCharacter().charAt(0) == ' ') {
                         int roll = Dice.roll(6);
-                       JOptionPane.showMessageDialog(null,
+                        if(gridO.getPosition()+roll>99)
+                        {
+                            JOptionPane.showMessageDialog(null,
+                                    roll,
+                                    "Your Roll",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null,
+                                    "You won!!",
+                                    "Congratulations",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            Main.mainStage.show();
+                            User.incrementWin();
+                            snekStage.close();
+                            flag = false;
+                            return;
+                        }
+                        JOptionPane.showMessageDialog(null,
                                 roll,
                                 "Your Roll",
                                 JOptionPane.INFORMATION_MESSAGE);
@@ -201,7 +217,6 @@ public class Controller {
                                 e.printStackTrace();
                             }
                             roll = Dice.roll(6);
-
                             if(gridX.getPosition()+roll>99)
                             {   JOptionPane.showMessageDialog(null,
                                     roll,
@@ -217,8 +232,6 @@ public class Controller {
                                 flag = false;
                                 return;
                             }
-
-
                             JOptionPane.showMessageDialog(null,
                                     roll,
                                     "CPU Roll",
@@ -251,6 +264,7 @@ public class Controller {
                             gridO.toggleFutureTile(roll);
                             for(int i = 0; i < roll; ++i) {
                                 pain.nextTile(gridO.nextPosition());
+
 //                             try {
 //                                 Thread.sleep(150);
 //                             } catch (InterruptedException e) {
@@ -287,6 +301,7 @@ public class Controller {
                             }
                             playerFlag = !playerFlag;
                         }
+                        //System.out.println(gridO.position);
                     }
                     else if(event.getCharacter().charAt(0) == 'a'){
                         pain.nextTile(gridO.getTile(0));
