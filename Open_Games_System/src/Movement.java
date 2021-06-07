@@ -73,8 +73,6 @@ public abstract class Movement {
         toggleY = true;
     }
     public void moveTo(Tile tile){
-        currX = toX;
-        currY = toY;
         toX = tile.getX();
         toY = tile.getY();
         System.out.println("toX: "+toX+"\ttoY: "+ toY);

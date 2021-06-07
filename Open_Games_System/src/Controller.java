@@ -23,7 +23,7 @@ public class Controller {
     Canvas canvas = new Canvas(Main.resolutionX,Main.resolutionY);
 //    MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
+
     boolean playerFlag = true;
     DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
     DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
@@ -34,6 +34,7 @@ public class Controller {
     }
 
     public void DND(ActionEvent actionEvent){
+        Image bg = new Image("file:src/assets/The_green_way.png");
         Main.mainStage.hide();
         Stage DNDStage = new Stage();
         test.setFitWidth(Main.width);
@@ -101,6 +102,7 @@ public class Controller {
 
 
     public void snek(ActionEvent actionEvent) {
+        Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
         Main.mainStage.hide();
         Stage snekStage = new Stage();
 
