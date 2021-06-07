@@ -22,7 +22,11 @@ public class characterSheet implements Sheet {
     @Override
     public void store() {
         try {
+
             String currentFileLocation = "file:src/stats/charactersheet.json";
+
+
+
 
             JSONObject States = new JSONObject();
             File file = new File(currentFileLocation);
@@ -30,7 +34,7 @@ public class characterSheet implements Sheet {
                 file.createNewFile();
             writeData.put("playerName", playerName);
             writeData.put("Level", playerLevel);
-            for (int i = 0; i < Main_Stats.length - 1; i++) {
+            for (int i = 0; i < Main_Stats.length ; i++) {
                 System.out.println(Main_Stats[i] + "  " + valueStoredForStat[i]);
                 States.put(Main_Stats[i], valueStoredForStat[i]);
                 statMod[i] = setMod(valueStoredForStat[i]);
@@ -57,10 +61,9 @@ public class characterSheet implements Sheet {
     }
 
     public static void main(String[] args) throws Exception {
-       // characterSheet pl = new characterSheet("Dragonborn",new Integer[]{3,4,8,5,1},1);
-        characterSheet temp = new characterSheet();
-        temp.read();
-        temp.print();
+        characterSheet pl = new characterSheet("Dragonborn",new Integer[]{3,4,8,5,1,100},1);
+
+        //characterSheet temp = new characterSheet();
     }
     public void update()
     {
