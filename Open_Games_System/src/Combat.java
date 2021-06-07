@@ -3,7 +3,8 @@ public final class Combat {
         private static int damage;
         private static String rolls;
         private static String attackString;
-        private static void CalcDamage(PlayerSheet attacker, PlayerSheet attacked){
+        private static void CalcDamage(characterSheet attacker, characterSheet attacked){
+
             for(int i=0; i< attacker.weaponRoll;i++){
                 int roll = Dice.roll(6);
                 damage+= roll + attacker.strMod;
@@ -11,11 +12,11 @@ public final class Combat {
             }
             rolls += "= " + damage + ".\n";
         }
-        private static void AttemptAttack(PlayerSheet attacker, PlayerSheet attacked){
-            attackString = attacker.name + " is attacking " + attacked.name + " with his " + attacker.weapon + ".\n";
+        private static void AttemptAttack(characterSheet attacker, characterSheet attacked){
+            attackString = attacker.getPlayerName() + " is attacking " + attacked.getPlayerName() + " with his weapon.\n";
             int roll = Dice.roll(20);
-            attackString += attacker.name + " has rolled ( " + roll + " + " + attacker.strMod + " ) which ";
-            if(roll + attacker.strMod >= attacked.AC){
+            attackString += attacker.getPlayerName() + " has rolled ( " + roll + " + " + attacker.getStatMod()[0] + " ) which ";
+            if(roll + attacker.getStatMod()[0] >= attacked.getAC()){
                 attackString += "means his attack succeeded!\n";
                 CalcDamage(attacker, attacked);
             }
@@ -24,7 +25,7 @@ public final class Combat {
                 rolls = "And he took no damage.";
             }
         }
-        public static String Attack(PlayerSheet attacker, PlayerSheet attacked){
+        public static String Attack(characterSheet attacker, characterSheet attacked){
             damage = 0;
             rolls= "Damage roll = ";
             attackString = null;

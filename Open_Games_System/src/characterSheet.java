@@ -7,8 +7,10 @@ import java.util.*;
 
 public class characterSheet implements Sheet {
     private String playerName;
+    private int AC = 13;
     private Hashtable<String, JSONObject> Stats;
     private Integer[] valueStoredForStat= new Integer[Main_Stats.length];
+    private Integer[] statMod = new Integer[Main_Stats.length];
     private Integer playerLevel;
     public characterSheet(){}
     public characterSheet (String playerName,Integer[] Stat_Value,Integer playerLevel) throws Exception {
@@ -20,7 +22,7 @@ public class characterSheet implements Sheet {
     @Override
     public void store() {
         try {
-            String currentFileLocation = "C:\\Users\\Hp\\Desktop\\OOP\\Code\\Open_Games_System\\charactersheet.json";
+            String currentFileLocation = "file:src/stats/charactersheet.json";
 
             JSONObject States = new JSONObject();
             File file = new File(currentFileLocation);
@@ -31,6 +33,7 @@ public class characterSheet implements Sheet {
             for (int i = 0; i < Main_Stats.length - 1; i++) {
                 System.out.println(Main_Stats[i] + "  " + valueStoredForStat[i]);
                 States.put(Main_Stats[i], valueStoredForStat[i]);
+                statMod[i] = setMod(valueStoredForStat[i]);
             }
             writeData.put("Stats", States);
             FileWriter x = new FileWriter(currentFileLocation);
@@ -71,12 +74,28 @@ public class characterSheet implements Sheet {
         for(int i=0;i<sta.length;i++)
             System.out.println(Main_Stats[i]+" "+sta[i]);
     }
+    private int setMod(int stat){
+        return  (int)Math.floor(stat/2 -5);
+    }
+
+    public Integer[] getStatMod() {
+        return statMod;
+    }
+
     public String getPlayerName() {
         return playerName;
     }
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public int getAC() {
+        return AC;
+    }
+
+    public void setAC(int AC) {
+        this.AC = AC;
     }
 
     public Integer[] getStats() {
