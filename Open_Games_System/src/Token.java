@@ -2,6 +2,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Token extends ImageView {
+    Sheet sheet;
     public void setPosition(double x, double y){
         this.setX(x);
         this.setY(y);

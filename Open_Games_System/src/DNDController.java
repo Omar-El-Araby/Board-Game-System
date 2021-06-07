@@ -16,6 +16,10 @@ public class DNDController {
     Canvas canvas = new Canvas(Main.resolutionX,Main.resolutionY);
     GraphicsContext gc = canvas.getGraphicsContext2D();
     Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
+
+    public DNDController() throws Exception {
+    }
+
     public void DND(ActionEvent actionEvent){
         Main.mainStage.hide();
         Stage DNDStage = new Stage();
