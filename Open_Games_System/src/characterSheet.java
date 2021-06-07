@@ -18,23 +18,28 @@ public class characterSheet implements Sheet {
         store();
     }
     @Override
-    public void store() throws Exception {
-        String currentFileLocation = "C:\\Users\\Hp\\Desktop\\OOP\\Code\\Open_Games_System\\charactersheet.json";
-        JSONObject States = new JSONObject();
-        File file = new File(currentFileLocation);
-            if(!file.exists())
+    public void store() {
+        try {
+            String currentFileLocation = "C:\\Users\\Hp\\Desktop\\OOP\\Code\\Open_Games_System\\charactersheet.json";
+
+            JSONObject States = new JSONObject();
+            File file = new File(currentFileLocation);
+            if (!file.exists())
                 file.createNewFile();
-                writeData.put("playerName",playerName);
-                writeData.put("Level",playerLevel);
-                for(int i=0;i<Main_Stats.length-1;i++)
-                {
-                    System.out.println(Main_Stats[i]+"  "+valueStoredForStat[i]);
-                    States.put(Main_Stats[i],valueStoredForStat[i]);
-                }
-                writeData.put("Stats",States);
+            writeData.put("playerName", playerName);
+            writeData.put("Level", playerLevel);
+            for (int i = 0; i < Main_Stats.length - 1; i++) {
+                System.out.println(Main_Stats[i] + "  " + valueStoredForStat[i]);
+                States.put(Main_Stats[i], valueStoredForStat[i]);
+            }
+            writeData.put("Stats", States);
             FileWriter x = new FileWriter(currentFileLocation);
             x.write(writeData.toString());
             x.flush();
+        }
+        catch (IOException e){
+            System.out.println("File not Found.");
+        }
     }
     @Override
     public void read() throws Exception {

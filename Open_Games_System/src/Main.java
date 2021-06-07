@@ -30,8 +30,14 @@ public class Main extends Application {
     static public int divY = 30;
     static public double resolutionX = 960;
     static public double resolutionY = 960;
+    static public int divSnakeX = 10;
+    static public int divSnakeY = 10;
+    static public double resolutionSnakeX = 960;
+    static public double resolutionSnakeY = 960;
     static public double width = resolutionX/divX;
     static public double height = resolutionY/divY;
+    static public double widthSnake = resolutionSnakeX/divSnakeX;
+    static public double heightSnake = resolutionSnakeY/divSnakeY;
     static public Stage mainStage;
     static public Controller controller;
 

@@ -31,9 +31,9 @@ public class Controller {
     static public ControllerLogin controllerLogin;
     Token playerO = new Token(0,0,new Image("file:src/assets/O.png"));
     Token playerX = new Token(0,0,new Image("file:src/assets/X.png"));
-    SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
-    SnakeLadderGrid gridX = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
-    Canvas canvas = new Canvas(Main.resolutionX,Main.resolutionY);
+    SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionSnakeX,Main.resolutionSnakeY);
+    SnakeLadderGrid gridX = new SnakeLadderGrid(10,10,Main.resolutionSnakeX,Main.resolutionSnakeY);
+    Canvas canvas = new Canvas(Main.resolutionSnakeX,Main.resolutionSnakeY);
 //    MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
     GraphicsContext gc = canvas.getGraphicsContext2D();
 

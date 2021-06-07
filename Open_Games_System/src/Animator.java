@@ -15,8 +15,8 @@ public class Animator implements Runnable{
 //          gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
 //          gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
 
-            gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.width,  Main.height);
-            gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.width,  Main.height);
+            gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.widthSnake,  Main.heightSnake);
+            gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.widthSnake,  Main.heightSnake);
            try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
