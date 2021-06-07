@@ -14,7 +14,7 @@
          <font>
             <Font name="Times New Roman Bold Italic" size="15.0" />
          </font></Button>
-      <Button layoutX="51.0" layoutY="206.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="149.0" styleClass="mainmenubutton" stylesheets="@style.css" text="Surprise ;)" textFill="WHITE">
+      <Button layoutX="51.0" layoutY="206.0" mnemonicParsing="false" onAction="#stats" prefHeight="44.0" prefWidth="149.0" styleClass="mainmenubutton" stylesheets="@style.css" text="Player Stats" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold Italic" size="15.0" />
          </font></Button>

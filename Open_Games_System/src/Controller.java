@@ -38,6 +38,7 @@ public class Controller {
     GraphicsContext gc = canvas.getGraphicsContext2D();
     Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
     boolean playerFlag = true;
+    boolean singlePlayer = true;
     DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
     DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
     BattleMap map = new BattleMap();
@@ -153,54 +154,112 @@ public class Controller {
              //   else if(event.getCharacter().charAt(0) == 'd')
                     //pain.moveRight();
 
-                 if(event.getCharacter().charAt(0) == ' ') {
-                     int roll = Dice.roll(6);
-                     if(playerFlag) {
-                         gridO.toggleFutureTile(roll);
-                         for(int i = 0; i < roll; ++i) {
-                             pain.nextTile(gridO.nextPosition());
+                if(singlePlayer) {
+                    if(event.getCharacter().charAt(0) == ' ') {
+                        int roll = Dice.roll(6);
+                        JOptionPane.showMessageDialog(null,
+                                roll,
+                                "Your Roll",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        gridO.toggleFutureTile(roll);
+                        for(int i = 0; i < roll; ++i) {
+                            pain.nextTile(gridO.nextPosition());
 //                             try {
 //                                 Thread.sleep(150);
 //                             } catch (InterruptedException e) {
 //                                 e.printStackTrace();
 //                             }
-                         }
-                         if(gridO.getPosition() == 99) {
-                             JOptionPane.showMessageDialog(null,
-                                     "YOU WON!!",
-                                     "congeration",
-                                     JOptionPane.INFORMATION_MESSAGE);
-                             Main.mainStage.show();
-                             snekStage.hide();
-                         }
-                         playerFlag = !playerFlag;
-                     }
-                     else {
-                         gridX.toggleFutureTile(roll);
-                         for(int i = 0; i < roll; ++i) {
-                             suffering.nextTile(gridX.nextPosition());
+                        }
+                        if(gridO.getPosition() == 99) {
+                            JOptionPane.showMessageDialog(null,
+                                    "You won!!",
+                                    "Congratulations",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            Main.mainStage.show();
+                            User.incrementWin();
+                            snekStage.close();
+                        }
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        roll = Dice.roll(6);
+                        JOptionPane.showMessageDialog(null,
+                                roll,
+                                "CPU Roll",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        gridX.toggleFutureTile(roll);
+                        for(int i = 0; i < roll; ++i) {
+                            suffering.nextTile(gridX.nextPosition());
 //                             try {
 //                                 Thread.sleep(150);
 //                             } catch (InterruptedException e) {
 //                                 e.printStackTrace();
 //                             }
-                         }
-                         if(gridX.getPosition() == 99) {
-                             JOptionPane.showMessageDialog(null,
-                                     "YOU WON!!",
-                                     "congeration",
-                                     JOptionPane.INFORMATION_MESSAGE);
-                             Main.mainStage.show();
-                             snekStage.hide();
-                         }
-                         playerFlag = !playerFlag;
-                     }
+                        }
+                        if(gridX.getPosition() == 99) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Computer wins!!",
+                                    "Sadness ensues",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            Main.mainStage.show();
+                            User.incrementLoss();
+                            snekStage.close();
+                        }
+                    }
+                }
+                else {
+                    if(event.getCharacter().charAt(0) == ' ') {
+                        int roll = Dice.roll(6);
+                        if(playerFlag) {
+                            gridO.toggleFutureTile(roll);
+                            for(int i = 0; i < roll; ++i) {
+                                pain.nextTile(gridO.nextPosition());
+//                             try {
+//                                 Thread.sleep(150);
+//                             } catch (InterruptedException e) {
+//                                 e.printStackTrace();
+//                             }
+                            }
+                            if(gridO.getPosition() == 99) {
+                                JOptionPane.showMessageDialog(null,
+                                        "YOU WON!!",
+                                        "congeration",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                Main.mainStage.show();
+                                snekStage.hide();
+                            }
+                            playerFlag = !playerFlag;
+                        }
+                        else {
+                            gridX.toggleFutureTile(roll);
+                            for(int i = 0; i < roll; ++i) {
+                                suffering.nextTile(gridX.nextPosition());
+//                             try {
+//                                 Thread.sleep(150);
+//                             } catch (InterruptedException e) {
+//                                 e.printStackTrace();
+//                             }
+                            }
+                            if(gridX.getPosition() == 99) {
+                                JOptionPane.showMessageDialog(null,
+                                        "YOU WON!!",
+                                        "congeration",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                Main.mainStage.show();
+                                snekStage.hide();
+                            }
+                            playerFlag = !playerFlag;
+                        }
+                    }
+                    else if(event.getCharacter().charAt(0) == 'a'){
+                        pain.nextTile(gridO.getTile(0));
+                        suffering.nextTile(gridX.getTile(0));
+                    }
                      //System.out.println(gridO.position);
                 }
-                 else if(event.getCharacter().charAt(0) == 'a'){
-                     pain.nextTile(gridO.getTile(0));
-                     suffering.nextTile(gridX.getTile(0));
-                 }
+
 //                    boolean flag = true;
 //                    int roll = Dice.roll(6) + 1;
 //                    for(int i = 0; i < roll; ++i) {
@@ -267,5 +326,12 @@ public class Controller {
             btnFlag = true;
         }
         usrName.setText(User.getCurrentUser());
+    }
+
+    public void stats(ActionEvent actionEvent) {
+        JOptionPane.showMessageDialog(null,
+                "Wins: " + User.getWin() + "\nLosses: " + User.getLoss(),
+                "Stats",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 }

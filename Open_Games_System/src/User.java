@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class User {
@@ -59,5 +60,62 @@ public class User {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+    }
+    static public void incrementWin() {
+        saveFile(true); //increment the win counter in the file
+    }
+    static public void incrementLoss() {
+        saveFile(false); //increment the loss counter in the file
+    }
+    static public int getWin() {
+        return readFile(true); //read the win counter from the file
+    }
+    static public int getLoss() {
+        return readFile(false); //read the loss counter from the file
+    }
+    static private void saveFile(boolean win) {
+        if(Objects.equals(getCurrentUser(), "Guest")) return;
+        File stats = new File("src/stats/" + getCurrentUser() + ".txt");
+        Scanner scanner = null;
+        PrintWriter printWriter = null;
+        try {
+            if(stats.createNewFile()) {
+                printWriter = new PrintWriter(stats);
+                printWriter.print("0 0");
+                printWriter.close();
+            }
+            scanner = new Scanner(stats);
+            int wins = scanner.nextInt();
+            int losses = scanner.nextInt();
+            if(win) ++wins;
+            else ++losses;
+            printWriter = new PrintWriter(stats);
+            printWriter.flush();
+            printWriter.print(wins + " " + losses);
+            printWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    static private int readFile(boolean win) {
+        if(Objects.equals(getCurrentUser(), "Guest")) return 0;
+        File stats = new File("src/stats/" + getCurrentUser() + ".txt");
+        Scanner scanner = null;
+        PrintWriter printWriter = null;
+        try {
+            if(stats.createNewFile()) {
+                printWriter = new PrintWriter(stats);
+                printWriter.print("0 0");
+                printWriter.close();
+            }
+            scanner = new Scanner(stats);
+            int wins = scanner.nextInt();
+            int losses = scanner.nextInt();
+            if(win) return wins;
+            else return losses;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
