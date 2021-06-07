@@ -1,3 +1,7 @@
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+
 public final class Combat {
     public static class Weapon{
         private static int damage;
@@ -42,7 +46,7 @@ public final class Combat {
 
     public static void main(String[] args) {
         characterSheet pl = new characterSheet("Dragonborn",new Integer[]{3,4,8,5,1,100},1,"src/stats/charactersheet.json");
-        characterSheet pl2 = new characterSheet("PornDragon",new Integer[]{7,3,12,11,5,40},1,"src/stats/charactersheet2.json");
+        characterSheet pl2 = new characterSheet("DireWolf",new Integer[]{7,3,12,11,5,40},1,"src/stats/charactersheet2.json");
         //Combat.Weapon.CalcDamage(a,b);
         //System.out.println(Weapon.Attack(pl,pl2));
         //System.out.println(Weapon.Attack(b,a));

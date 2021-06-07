@@ -4,12 +4,14 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Combat">
+<AnchorPane prefHeight="368.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerAttack">
    <children>
       <Label layoutX="147.0" text="The Attack MENU!!!!!!!" />
       <Label layoutX="14.0" layoutY="48.0" text="Token : " />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField editable="false" layoutX="55.0" layoutY="43.0" />
+      <ImageView fx:id="tknImg" fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="tknName" layoutX="56.0" layoutY="48.0" text="Name" />
+      <Label layoutX="14.0" layoutY="202.0" text="Target : " />
+      <Label layoutX="58.0" layoutY="202.0" text="TName" fx:id="targetName"/>
+      <ImageView fx:id="targetImg" fitHeight="150.0" fitWidth="217.0" layoutX="180.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
