@@ -12,11 +12,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
@@ -30,13 +33,21 @@ public class Main extends Application {
     static public double width = resolutionX/divX;
     static public double height = resolutionY/divY;
     static public Stage mainStage;
+    static public Controller controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+//        String musicFile = "src/assets/menumusic.mp3";                    //Worthless failed attempt to add menu music
+//        Media sound = new Media(new File(musicFile).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//        mediaPlayer.play();
+
         mainStage = primaryStage;
         mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = loader.load();
+        controller = loader.getController();
         mainStage.setTitle("Main Menu");
         mainStage.setScene(new Scene(root));
         mainStage.show();

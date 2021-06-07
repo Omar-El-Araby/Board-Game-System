@@ -2,20 +2,33 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Controller {
+    public Button usrBtn;
+    public Label usrName;
+    boolean rememberme = User.getRememberme();
+    boolean btnFlag = false;
+    public Stage login = new Stage();
+    static public ControllerLogin controllerLogin;
     Token playerO = new Token(0,0,new Image("file:src/assets/O.png"));
     Token playerX = new Token(0,0,new Image("file:src/assets/X.png"));
     SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
@@ -25,20 +38,27 @@ public class Controller {
     GraphicsContext gc = canvas.getGraphicsContext2D();
 
     boolean playerFlag = true;
+    boolean singlePlayer = true;
     DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
     DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
     BattleMap map = new BattleMap();
 
-    public Controller() throws Exception {
-    }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
+
 
     @FXML
-    public void initialize() {
-
+    public void initialize() throws IOException {
+        login.initStyle(StageStyle.UNDECORATED);
+        login.setResizable(false);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent root = loader.load();
+        controllerLogin = loader.getController();
+        login.setTitle("Login");
+        login.setScene(new Scene(root));
+        if(!rememberme) {
+            User.setCurrentUser("Guest");
+        }
+        refreshUser();
     }
 
     public void DND(ActionEvent actionEvent){
@@ -147,35 +167,11 @@ public class Controller {
              //   else if(event.getCharacter().charAt(0) == 'd')
                     //pain.moveRight();
 
-<<<<<<< Updated upstream
-                 if(event.getCharacter().charAt(0) == ' ') {
-                     int roll = Dice.roll(6);
-                     if(playerFlag) {
-                         gridO.toggleFutureTile(roll);
-                         for(int i = 0; i < roll; ++i) {
-                             pain.nextTile(gridO.nextPosition());
-=======
                 if(singlePlayer) {
                     boolean flag = true;
                     if(event.getCharacter().charAt(0) == ' ') {
                         int roll = Dice.roll(6);
-                        if(gridO.getPosition()+roll>99)
-                        {
-                            JOptionPane.showMessageDialog(null,
-                                    roll,
-                                    "Your Roll",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            JOptionPane.showMessageDialog(null,
-                                    "You won!!",
-                                    "Congratulations",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            Main.mainStage.show();
-                            User.incrementWin();
-                            snekStage.close();
-                            flag = false;
-                            return;
-                        }
-                        JOptionPane.showMessageDialog(null,
+                       JOptionPane.showMessageDialog(null,
                                 roll,
                                 "Your Roll",
                                 JOptionPane.INFORMATION_MESSAGE);
@@ -205,6 +201,7 @@ public class Controller {
                                 e.printStackTrace();
                             }
                             roll = Dice.roll(6);
+
                             if(gridX.getPosition()+roll>99)
                             {   JOptionPane.showMessageDialog(null,
                                     roll,
@@ -220,6 +217,8 @@ public class Controller {
                                 flag = false;
                                 return;
                             }
+
+
                             JOptionPane.showMessageDialog(null,
                                     roll,
                                     "CPU Roll",
@@ -252,49 +251,50 @@ public class Controller {
                             gridO.toggleFutureTile(roll);
                             for(int i = 0; i < roll; ++i) {
                                 pain.nextTile(gridO.nextPosition());
->>>>>>> Stashed changes
 //                             try {
 //                                 Thread.sleep(150);
 //                             } catch (InterruptedException e) {
 //                                 e.printStackTrace();
 //                             }
-                         }
-                         if(gridO.getPosition() == 99) {
-                             JOptionPane.showMessageDialog(null,
-                                     "YOU WON!!",
-                                     "congeration",
-                                     JOptionPane.INFORMATION_MESSAGE);
-                             Main.mainStage.show();
-                             snekStage.hide();
-                         }
-                         playerFlag = !playerFlag;
-                     }
-                     else {
-                         gridX.toggleFutureTile(roll);
-                         for(int i = 0; i < roll; ++i) {
-                             suffering.nextTile(gridX.nextPosition());
+                            }
+                            if(gridO.getPosition() == 99) {
+                                JOptionPane.showMessageDialog(null,
+                                        "YOU WON!!",
+                                        "congeration",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                Main.mainStage.show();
+                                snekStage.hide();
+                            }
+                            playerFlag = !playerFlag;
+                        }
+                        else {
+                            gridX.toggleFutureTile(roll);
+                            for(int i = 0; i < roll; ++i) {
+                                suffering.nextTile(gridX.nextPosition());
 //                             try {
 //                                 Thread.sleep(150);
 //                             } catch (InterruptedException e) {
 //                                 e.printStackTrace();
 //                             }
-                         }
-                         if(gridX.getPosition() == 99) {
-                             JOptionPane.showMessageDialog(null,
-                                     "YOU WON!!",
-                                     "congeration",
-                                     JOptionPane.INFORMATION_MESSAGE);
-                             Main.mainStage.show();
-                             snekStage.hide();
-                         }
-                         playerFlag = !playerFlag;
-                     }
+                            }
+                            if(gridX.getPosition() == 99) {
+                                JOptionPane.showMessageDialog(null,
+                                        "YOU WON!!",
+                                        "congeration",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                Main.mainStage.show();
+                                snekStage.hide();
+                            }
+                            playerFlag = !playerFlag;
+                        }
+                    }
+                    else if(event.getCharacter().charAt(0) == 'a'){
+                        pain.nextTile(gridO.getTile(0));
+                        suffering.nextTile(gridX.getTile(0));
+                    }
                      //System.out.println(gridO.position);
                 }
-                 else if(event.getCharacter().charAt(0) == 'a'){
-                     pain.nextTile(gridO.getTile(0));
-                     suffering.nextTile(gridX.getTile(0));
-                 }
+
 //                    boolean flag = true;
 //                    int roll = Dice.roll(6) + 1;
 //                    for(int i = 0; i < roll; ++i) {
@@ -334,5 +334,39 @@ public class Controller {
     public void bgOnMouseDragged(MouseEvent mouseEvent) {
         Main.mainStage.setX(mouseEvent.getScreenX() + xOffset);
         Main.mainStage.setY(mouseEvent.getScreenY() + yOffset);
+    }
+
+    public void usrChk(ActionEvent actionEvent) {
+        if(btnFlag) {
+            User.setRememberme(false);
+            User.setCurrentUser("Guest");
+            refreshUser();
+            JOptionPane.showMessageDialog(null,
+                    "Logged out successfully!",
+                    "Logout",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            login.show();
+        }
+    }
+
+    public void refreshUser() {
+        if(Objects.equals(User.getCurrentUser(), "Guest")) {
+            usrBtn.setText("Log in");
+            btnFlag = false;
+        }
+        else {
+            usrBtn.setText("Log out");
+            btnFlag = true;
+        }
+        usrName.setText(User.getCurrentUser());
+    }
+
+    public void stats(ActionEvent actionEvent) {
+        JOptionPane.showMessageDialog(null,
+                "Wins: " + User.getWin() + "\nLosses: " + User.getLoss(),
+                "Stats",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 }
