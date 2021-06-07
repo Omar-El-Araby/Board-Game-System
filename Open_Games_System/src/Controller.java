@@ -2,20 +2,33 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Controller {
+    public Button usrBtn;
+    public Label usrName;
+    boolean rememberme = User.getRememberme();
+    boolean btnFlag = false;
+    public Stage login = new Stage();
+    static public ControllerLogin controllerLogin;
     Token playerO = new Token(0,0,new Image("file:src/assets/O.png"));
     Token playerX = new Token(0,0,new Image("file:src/assets/X.png"));
     SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionX,Main.resolutionY);
@@ -28,9 +41,21 @@ public class Controller {
     DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
     DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
     BattleMap map = new BattleMap();
-    @FXML
-    public void initialize() {
 
+
+    @FXML
+    public void initialize() throws IOException {
+        login.initStyle(StageStyle.UNDECORATED);
+        login.setResizable(false);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent root = loader.load();
+        controllerLogin = loader.getController();
+        login.setTitle("Login");
+        login.setScene(new Scene(root));
+        if(!rememberme) {
+            User.setCurrentUser("Guest");
+        }
+        refreshUser();
     }
 
     public void DND(ActionEvent actionEvent){
@@ -215,5 +240,32 @@ public class Controller {
     public void bgOnMouseDragged(MouseEvent mouseEvent) {
         Main.mainStage.setX(mouseEvent.getScreenX() + xOffset);
         Main.mainStage.setY(mouseEvent.getScreenY() + yOffset);
+    }
+
+    public void usrChk(ActionEvent actionEvent) {
+        if(btnFlag) {
+            User.setRememberme(false);
+            User.setCurrentUser("Guest");
+            refreshUser();
+            JOptionPane.showMessageDialog(null,
+                    "Logged out successfully!",
+                    "Logout",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            login.show();
+        }
+    }
+
+    public void refreshUser() {
+        if(Objects.equals(User.getCurrentUser(), "Guest")) {
+            usrBtn.setText("Log in");
+            btnFlag = false;
+        }
+        else {
+            usrBtn.setText("Log out");
+            btnFlag = true;
+        }
+        usrName.setText(User.getCurrentUser());
     }
 }
