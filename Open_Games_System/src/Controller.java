@@ -28,6 +28,10 @@ public class Controller {
     DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
     DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
     BattleMap map = new BattleMap();
+
+    public Controller() throws Exception {
+    }
+
     @FXML
     public void initialize() {
 
