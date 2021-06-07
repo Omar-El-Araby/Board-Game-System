@@ -7,10 +7,11 @@ public class Animator implements Runnable{
     Image bg;
     Token tkn1, tkn2;
     Movement mv1, mv2;
-    AnimationTimer ani1 = new AnimationTimer() {
+    int selector;
+    AnimationTimer aniSnek = new AnimationTimer() {
         @Override
         public void handle(long now) {
-            gc.drawImage(bg,0,0, Main.resolutionX, Main.resolutionY);
+            gc.drawImage(bg,0,0, Main.resolutionSnakeX, Main.resolutionSnakeY);
     
 //          gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
 //          gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
@@ -27,6 +28,26 @@ public class Animator implements Runnable{
 
         }
     };
+    AnimationTimer aniDnd = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            gc.drawImage(bg,0,0, Main.resolutionX, Main.resolutionY);
+
+//          gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
+//          gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.resolutionX/10,  Main.resolutionY/10);
+
+            gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.width,  Main.height);
+            gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.width,  Main.height);
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.println("running");
+
+
+        }
+    };
     AnimationTimer ani2 = new AnimationTimer() {
         @Override
         public void handle(long now) {
@@ -34,13 +55,14 @@ public class Animator implements Runnable{
             gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.width,  Main.height);
         }
     };
-    public Animator(GraphicsContext gc, Image bg, Token tkn1, Token tkn2, Movement mv1, Movement mv2) {
+    public Animator(GraphicsContext gc, Image bg, Token tkn1, Token tkn2, Movement mv1, Movement mv2, int selector) {
         this.gc = gc;
         this.bg = bg;
         this.tkn1 = tkn1;
         this.tkn2 = tkn2;
         this.mv1 = mv1;
         this.mv2 = mv2;
+        this.selector = selector;
     }
     public Animator(GraphicsContext gc, Image bg, Token tkn, Movement mv){
         this.gc = gc;
@@ -50,6 +72,11 @@ public class Animator implements Runnable{
     }
     @Override
     public void run() {
-        ani1.start();
+        if (selector == 1) {
+            aniSnek.start();
+        }
+        else if (selector == 2) {
+            aniDnd.start();
+        }
     }
 }

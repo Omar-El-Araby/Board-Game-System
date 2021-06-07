@@ -39,8 +39,8 @@ public class Controller {
 
     boolean playerFlag = true;
     boolean singlePlayer = true;
-    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/O.png"));
-    DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
+    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/knight.png"));
+    DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/direwolf.png"));
     BattleMap map = new BattleMap();
 
 
@@ -118,7 +118,7 @@ public class Controller {
         };
 
         //Thread animation = new Thread(new Animator(gc, bg, test,mover));
-        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1));
+        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1, 2));
         animation.start();
         Group root = new Group(canvas);
         Scene scene = new Scene(root);
@@ -324,7 +324,7 @@ public class Controller {
             }
         };
 
-        Thread animation = new Thread(new Animator(gc, bg, playerO, playerX, pain, suffering));
+        Thread animation = new Thread(new Animator(gc, bg, playerO, playerX, pain, suffering, 1));
         animation.start();
 
         Group root = new Group(canvas);
