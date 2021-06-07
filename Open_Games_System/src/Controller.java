@@ -155,6 +155,7 @@ public class Controller {
                     //pain.moveRight();
 
                 if(singlePlayer) {
+                    boolean flag = true;
                     if(event.getCharacter().charAt(0) == ' ') {
                         int roll = Dice.roll(6);
                         JOptionPane.showMessageDialog(null,
@@ -178,34 +179,37 @@ public class Controller {
                             Main.mainStage.show();
                             User.incrementWin();
                             snekStage.close();
+                            flag = false;
                         }
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        roll = Dice.roll(6);
-                        JOptionPane.showMessageDialog(null,
-                                roll,
-                                "CPU Roll",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        gridX.toggleFutureTile(roll);
-                        for(int i = 0; i < roll; ++i) {
-                            suffering.nextTile(gridX.nextPosition());
+                        if(flag) {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            roll = Dice.roll(6);
+                            JOptionPane.showMessageDialog(null,
+                                    roll,
+                                    "CPU Roll",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            gridX.toggleFutureTile(roll);
+                            for(int i = 0; i < roll; ++i) {
+                                suffering.nextTile(gridX.nextPosition());
 //                             try {
 //                                 Thread.sleep(150);
 //                             } catch (InterruptedException e) {
 //                                 e.printStackTrace();
 //                             }
-                        }
-                        if(gridX.getPosition() == 99) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Computer wins!!",
-                                    "Sadness ensues",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            Main.mainStage.show();
-                            User.incrementLoss();
-                            snekStage.close();
+                            }
+                            if(gridX.getPosition() == 99) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Computer wins!!",
+                                        "Sadness ensues",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                Main.mainStage.show();
+                                User.incrementLoss();
+                                snekStage.close();
+                            }
                         }
                     }
                 }
