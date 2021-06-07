@@ -39,11 +39,16 @@ public class Controller {
 
     boolean playerFlag = true;
     boolean singlePlayer = true;
+
     DNDToken[] gamer = new DNDToken[10];//= new DNDToken(0,0,new Image("file:src/assets/O.png"));
     MovementDND[] mover = new MovementDND[10];
     int selectedToken = 0;
     int limit = 2;
     // DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
+
+//    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/knight.png"));
+//    DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/direwolf.png"));
+
     BattleMap map = new BattleMap();
 
 
@@ -66,8 +71,8 @@ public class Controller {
 
     public void DND(ActionEvent actionEvent){
         Image bg = new Image("file:src/assets/The_green_way.png");
-        gamer[0] = new DNDToken(0,0,new Image("file:src/assets/O.png"));
-        gamer[1] = new DNDToken(0,0,new Image("file:src/assets/X.png"));
+        gamer[0] = new DNDToken(0,0,new Image("file:src/assets/knight.png"));
+        gamer[1] = new DNDToken(0,0,new Image("file:src/assets/direwolf.png"));
         gamer[0].setPos(5,15);
         gamer[1].setPos(22,19);
         Main.mainStage.hide();
@@ -123,7 +128,11 @@ public class Controller {
             }
         });
         //Thread animation = new Thread(new Animator(gc, bg, test,mover));
-        Thread animation = new Thread(new Animator(gc, bg, gamer[0], gamer[1], mover[0], mover[1]));
+
+        Thread animation = new Thread(new Animator(gc, bg, gamer[0], gamer[1], mover[0], mover[1],2));
+
+//        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1, 2));
+
         animation.start();
         Group root = new Group(canvas);
         Scene scene = new Scene(root);
@@ -329,7 +338,7 @@ public class Controller {
             }
         };
 
-        Thread animation = new Thread(new Animator(gc, bg, playerO, playerX, pain, suffering));
+        Thread animation = new Thread(new Animator(gc, bg, playerO, playerX, pain, suffering, 1));
         animation.start();
 
         Group root = new Group(canvas);
