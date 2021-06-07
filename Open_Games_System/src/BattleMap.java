@@ -1,7 +1,8 @@
-public class BattleMap extends Grid{
-    private static int x = 100; //all movements that use battlemap should have the same grid
-    private static int y = 100;
-    private int[] position = {4,4}/*new int[2]*/;
+public final class BattleMap extends Grid{
+    private static int x = Main.divX; //all movements that use battlemap should have the same grid
+    private static int y = Main.divY;
+    private int[] position = {4,4};
+
     public BattleMap(){
         super.tiles = new Tile[x][y];
         populateTiles(Main.resolutionX,Main.resolutionY);
@@ -53,21 +54,25 @@ public class BattleMap extends Grid{
     }
     public void moveTileUp(){
         //System.out.printf("pre-PositionY: %d\t",position[1]);
+        tiles[position[0]][position[1]].moveToken(getTileUp());
         moveTileY(-1);
         //System.out.printf("post-PositionY: %d\t",position[1]);
     }
     public void moveTileDown(){
         //System.out.printf("pre-PositionY: %d\t",position[1]);
+        tiles[position[0]][position[1]].moveToken(getTileDown());
         moveTileY(1);
         //System.out.printf("post-PositionY: %d\t",position[1]);
     }
     public void moveTileLeft(){ //correct
         //System.out.printf("pre-PositionX: %d\t",position[0]);
+        tiles[position[0]][position[1]].moveToken(getTileLeft());
         moveTileX(-1);
         //System.out.printf("post-PositionX: %d\t",position[0]);
     }
     public void moveTileRight(){ //correct
         //System.out.printf("pre-PositionX: %d\t",position[0]);
+        tiles[position[0]][position[1]].moveToken(getTileRight());
         moveTileX(1);
         //System.out.printf("post-PositionX: %d\t",position[0]);
     }

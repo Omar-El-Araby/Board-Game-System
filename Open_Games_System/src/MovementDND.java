@@ -1,7 +1,7 @@
 public class MovementDND extends Movement{
     private DNDToken token; //took the entire token instead of its position to potentially apply status effects.
     private BattleMap map = new BattleMap();
-
+    private int[] position = {4,4};
     public MovementDND(){}
     public MovementDND(DNDToken token){
         super(token);
@@ -44,6 +44,22 @@ public class MovementDND extends Movement{
             map.moveTileRight();
         }
         //System.out.printf("X: %d\tY: %d\n",map.getPositionX(),map.getPositionY());
+    }
+    public void moveTo(Tile tile){
+        double toX = currX;
+        double toY = currY;
+        double incX = Main.width;
+        double incY = Main.height;
+        if(token.canMove()){
+            toX = tile.getX();
+            toY = tile.getY();
+            if(toX < currX) incX = -incX;
+            if(toY < currY) incY = -incY;
+        }
+        while(Math.abs(toX - currX) > token.maxMovement*Main.width)toX -= incX;
+        while(Math.abs(toY - currY) > token.maxMovement*Main.height)toY -= incY;
+        this.toX = toX;
+        this.toY = toY;
     }
     public boolean checkSurroundings(String type){
         for(int i = -1;i<2;i++){

@@ -5,7 +5,8 @@ public abstract class Movement {
     protected double toY;
     protected boolean toggleX = true;
     protected boolean toggleY = true;
-    private double increment = 10;  //(double) Main.resolution/10;
+    private double incrementX = Main.resolutionX/100;//10;  //(double) Main.resolution/10;
+    private double incrementY = Main.resolutionY/100;
     public double getCurrX() {
         return (currX);
     }
@@ -18,14 +19,19 @@ public abstract class Movement {
     public double getToY() {
         return toY;
     }
-    public double getIncrement() {
-        return increment;
+    public double getIncrementX() {
+        return incrementX;
+    } //come back and set one for y
+    public void setIncrementX(double incrementX) {
+        this.incrementX = incrementX;
     }
-    public void setIncrement(double increment) {
-        this.increment = increment;
-    }
+    public double getIncrementY(){return incrementY;}
+    public void setIncrementY(double incrementY){this.incrementY = incrementY;}
     public Movement(){}
     public  Movement(Token token){
+        setPosition(token);
+    }
+    public void setPosition(Token token){
         currX = token.getX();
         currY = token.getY();
         toX = token.getX();
@@ -33,23 +39,23 @@ public abstract class Movement {
     }
     public double moveX(){
         if(currX < toX)
-            currX += increment;
+            currX += incrementX;
         else if(currX > toX)
-            currX -= increment;
+            currX -= incrementX;
         return currX;
     }
     public double moveY(){
-        if(currY < toY)
-            currY += increment;
+        if(currY < toY )
+            currY += incrementY;
         else if(currY > toY)
-            currY -= increment;
+            currY -= incrementY;
         return currY;
     }
     public boolean isDoneX(){
-        return (!(currX < toX + increment) || !(currX <= toX - increment)) && (!(currX >= toX - increment) || !(currX > toX + increment));
+        return (!(currX < toX + incrementX) || !(currX <= toX - incrementX)) && (!(currX >= toX - incrementX) || !(currX > toX + incrementX));
     }
     public boolean isDoneY(){
-        return (!(currY < toY + increment) || !(currY <= toY - increment)) && (!(currY >= toY - increment) || !(currY > toY + increment));
+        return (!(currY < toY + incrementY) || !(currY <= toY - incrementY)) && (!(currY >= toY - incrementY) || !(currY > toY + incrementY));
     }
     public boolean isDone(){
         return isDoneX() && isDoneY();
