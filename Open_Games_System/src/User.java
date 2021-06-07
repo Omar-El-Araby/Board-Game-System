@@ -40,10 +40,18 @@ public class User {
 
     static public boolean getRememberme() {
         Scanner scanner = null;
+        PrintWriter printWriter = null;
         try {
             rememberme.createNewFile();
             scanner = new Scanner(rememberme);
-            return scanner.nextBoolean();
+            if(scanner.hasNext())
+                return scanner.nextBoolean();
+            else {
+                printWriter = new PrintWriter(rememberme);
+                printWriter.print(false);
+                printWriter.close();
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
