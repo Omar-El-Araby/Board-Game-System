@@ -32,8 +32,8 @@ public class Main extends Application {
     static public double resolutionY = 800;
     static public int divSnakeX = 10;
     static public int divSnakeY = 10;
-    static public double resolutionSnakeX = 800;
-    static public double resolutionSnakeY = 800;
+    static public double resolutionSnakeX = Screen.getPrimary().getBounds().getMaxX() * 0.7;
+    static public double resolutionSnakeY = Screen.getPrimary().getBounds().getMaxY() * 0.5;
     static public double width = resolutionX/divX;
     static public double height = resolutionY/divY;
     static public double widthSnake = resolutionSnakeX/divSnakeX;

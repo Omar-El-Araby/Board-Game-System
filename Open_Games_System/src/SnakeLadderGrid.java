@@ -16,14 +16,14 @@ public class SnakeLadderGrid extends Grid{
     }
     @Override
     public void populateTiles(double height, double width) {
-        double inc = width/x;
+        double inc = Main.widthSnake; //width/x;
         double n = - inc; //starting point of x at the left
-        double m = height - height/y; //last point at y - 1 tile
+        double m = Main.resolutionSnakeY - Main.heightSnake; //last point at y - 1 tile
         int count = 0; // will always be x * y
         /*for (int i = 0; i<x ; i++,n+= width/x, m=0)
             for (int j = 0; j<y ; j++,m += height/y )
                 tiles[i][j] = new Tile(n,m,0);*/
-        for(int i = 0; i < y ; i++,m -= height/y,inc = -inc) {
+        for(int i = 0; i < y ; i++,m -= Main.heightSnake,inc = -inc) {
             for (int j = 0; j < x; j++) {
                 if(toggle){
                     n += inc;
