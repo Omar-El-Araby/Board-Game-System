@@ -17,8 +17,8 @@
       <Label fx:id="tknTHP" layoutX="47.0" layoutY="78.0" text="yourhp" />
       <Label layoutX="14.0" layoutY="215.0" text="HP : " />
       <Label fx:id="targetTHP" layoutX="50.0" layoutY="216.0" text="targethp" />
-      <Button fx:id="Switch" layoutX="10.0" layoutY="319.0" mnemonicParsing="false" text="Switch" />
-      <Button fx:id="Attack" layoutX="77.0" layoutY="319.0" mnemonicParsing="false" text="Attack" />
+      <Button layoutX="10.0" layoutY="319.0" mnemonicParsing="false" text="Switch" onMouseClicked="#Switch" />
+      <Button layoutX="77.0" layoutY="319.0" mnemonicParsing="false" text="Attack" onMouseClicked="#Attack" />
       <Label layoutX="13.0" layoutY="108.0" text="Your Stats: " />
       <Label layoutX="13.0" layoutY="245.0" text="Target Stats:" />
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="384.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#attackClose">
