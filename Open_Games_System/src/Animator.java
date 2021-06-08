@@ -2,6 +2,8 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import javax.swing.*;
+
 public class Animator implements Runnable{
     GraphicsContext gc;
     Image bg;
@@ -73,10 +75,26 @@ public class Animator implements Runnable{
     @Override
     public void run() {
         if (selector == 1) {
+            gc.drawImage(bg,0,0, Main.resolutionSnakeX, Main.resolutionSnakeY); //initialise stage
+            gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.width,  Main.height);
+            gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.width,  Main.height);
             aniSnek.start();
+
+            JOptionPane.showMessageDialog(null,
+                    "Press Spacebar to take a turn.\nBut beware, for each turn you take, the computer takes a turn too!",
+                    "Welcome to the Snek",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
         else if (selector == 2) {
+            gc.drawImage(bg,0,0, Main.resolutionX, Main.resolutionY);   //initialise stage
+            gc.drawImage(tkn1.getImage(), mv1.moveX(), mv1.moveY(), Main.width,  Main.height);
+            gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.width,  Main.height);
             aniDnd.start();
+            JOptionPane.showMessageDialog(null,
+                    "Click anywhere with your mouse or use WASD to move around.\nPress F to attack, or spacebar to switch characters." +
+                            "\nMost importantly, enjoy yourself and have fun!",
+                    "Welcome to the DnD",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }
