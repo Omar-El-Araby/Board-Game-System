@@ -1,6 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class ControllerAttack {
     DNDToken sheet1;
@@ -33,17 +34,37 @@ public class ControllerAttack {
     }
     @FXML
     public void initialize() {
+        init();
+    }
+    @FXML
+    public void Attack() {
+        Combat.Weapon.Attack(sheet1,sheet2);
+        init();
+    }
+    @FXML
+    public void Switch() {
+        Controller.DNDSwitchTokens();
+        init();
+    }
+
+    public void init() {
         initAttacker();
         initTarget();
     }
-    @FXML
-    public void Attack(){
-        Combat.Weapon.Attack(sheet1,sheet2);
-        initialize();
+
+    private double xOffset = 0, yOffset = 0;    //For dragging the window.
+
+    public void bgOnMousePressed(MouseEvent mouseEvent) {
+        xOffset = Main.controller.attackStage.getX() - mouseEvent.getScreenX();
+        yOffset = Main.controller.attackStage.getY() - mouseEvent.getScreenY();
     }
-    @FXML
-    public void Switch(){
-        Controller.DNDSwitchTokens();
-        initialize();
+
+    public void bgOnMouseDragged(MouseEvent mouseEvent) {
+        Main.controller.attackStage.setX(mouseEvent.getScreenX() + xOffset);
+        Main.controller.attackStage.setY(mouseEvent.getScreenY() + yOffset);
+    }
+
+    public void attackClose(MouseEvent mouseEvent) {
+        Main.controller.attackStage.hide();
     }
 }

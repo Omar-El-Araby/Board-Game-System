@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="368.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerAttack">
+<AnchorPane onMouseDragged="#bgOnMouseDragged" onMousePressed="#bgOnMousePressed" prefHeight="368.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerAttack">
    <children>
       <Label layoutX="147.0" text="The Attack MENU!!!!!!!" />
       <Label layoutX="14.0" layoutY="48.0" text="You : " />
@@ -21,5 +21,10 @@
       <Button fx:id="Attack" layoutX="77.0" layoutY="319.0" mnemonicParsing="false" text="Attack" />
       <Label layoutX="13.0" layoutY="108.0" text="Your Stats: " />
       <Label layoutX="13.0" layoutY="245.0" text="Target Stats:" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="384.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#attackClose">
+         <image>
+            <Image url="@assets/X.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
