@@ -30,7 +30,9 @@ public class Controller {
     boolean rememberme = User.getRememberme();
     boolean btnFlag = false;
     public Stage login = new Stage();
+    public Stage attackStage = new Stage();
     static public ControllerLogin controllerLogin;
+    static public ControllerAttack controllerAttack;
     Token playerO = new Token(0,0,new Image("file:src/assets/O.png"));
     Token playerX = new Token(0,0,new Image("file:src/assets/X.png"));
     SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionSnakeX,Main.resolutionSnakeY);
@@ -81,7 +83,7 @@ public class Controller {
             notSelected=1;
         }
     }
-    public void DND(ActionEvent actionEvent){
+    public void DND(ActionEvent actionEvent) throws IOException {
         Image bg = new Image("file:src/assets/The_green_way.png");
         gamer[0] = new DNDToken(0,0,new Image("file:src/assets/knight.png"),new characterSheet("src/stats/paladin.json"));
         gamer[1] = new DNDToken(0,0,new Image("file:src/assets/direwolf.png"),new characterSheet("src/stats/direwolf.json"));
@@ -157,6 +159,16 @@ public class Controller {
         DNDStage.setTitle("Main Menu");
         DNDStage.setScene(scene);
         DNDStage.show();
+
+
+        attackStage.initStyle(StageStyle.UNDECORATED);
+        attackStage.setResizable(false);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AttackMenu.fxml"));
+        Parent rootAttack = loader.load();
+        controllerAttack = loader.getController();
+        attackStage.setTitle("Attack Menu");
+        attackStage.setScene(new Scene(rootAttack));
+        attackStage.show();
     }
 
 
