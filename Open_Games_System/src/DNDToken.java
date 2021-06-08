@@ -1,4 +1,11 @@
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class DNDToken extends Token {
     private characterSheet Sheet;// = new characterSheet("BruhMomento", new Integer[]{1, 5, 2, 6, 5},5);
@@ -20,7 +27,9 @@ public class DNDToken extends Token {
         super(x,y,img);
     }
     public DNDToken(int x, int y, Image img, characterSheet sheet){
-        super(x,y,img);
+        this.setX(x);
+        this.setY(y);
+        this.setImage(img);
         this.Sheet = sheet;
     }
     public DNDToken(){}

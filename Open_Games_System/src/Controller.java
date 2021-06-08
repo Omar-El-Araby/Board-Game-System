@@ -1,4 +1,5 @@
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -39,12 +40,12 @@ public class Controller {
 
     boolean playerFlag = true;
     boolean singlePlayer = true;
-
-    DNDToken[] gamer = new DNDToken[10];//= new DNDToken(0,0,new Image("file:src/assets/O.png"));
+    @FXML
+    static DNDToken[] gamer = new DNDToken[10];//= new DNDToken(0,0,new Image("file:src/assets/O.png"));
     MovementDND[] mover = new MovementDND[10];
-    int selectedToken = 0;
-    int notSelected =1 ;
-    int limit = 2;
+    public static int selectedToken = 0;
+    public static int notSelected =1 ;
+    static int limit = 2;
     // DNDToken test1 = new DNDToken(0,0,new Image("file:src/assets/X.png"));
 
 //    DNDToken test = new DNDToken(0,0,new Image("file:src/assets/knight.png"));
@@ -69,7 +70,14 @@ public class Controller {
         }
         refreshUser();
     }
-
+    public static void DNDSwitchTokens(){
+        selectedToken++;
+        notSelected--;
+        if(selectedToken == limit){
+            selectedToken=0;
+            notSelected=1;
+        }
+    }
     public void DND(ActionEvent actionEvent){
         Image bg = new Image("file:src/assets/The_green_way.png");
         gamer[0] = new DNDToken(0,0,new Image("file:src/assets/knight.png"),new characterSheet("src/stats/paladin.json"));
@@ -96,12 +104,7 @@ public class Controller {
                 if(event.getCharacter().charAt(0) == ' ')
                 {
                     System.out.println(selectedToken);
-                    selectedToken++;
-                    notSelected--;
-                    if(selectedToken == limit){
-                        selectedToken=0;
-                        notSelected=1;
-                    }
+                    DNDSwitchTokens();
 
                     System.out.println(selectedToken);
                 }
