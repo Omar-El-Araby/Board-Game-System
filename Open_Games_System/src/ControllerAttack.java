@@ -5,32 +5,31 @@ import javafx.scene.image.ImageView;
 public class ControllerAttack {
     DNDToken sheet1;
     DNDToken sheet2;
-    public Label tknName;
-
+    public Label tknName = new Label();
+    public Label tknStats= new Label();
     public int tknHP;
-    public Label tknTHP;
+    public Label tknTHP= new Label();
     public ImageView tknImg;
-    public Label targetName;
-
+    public Label targetName= new Label();
+    public Label targetStats= new Label();
     public int targetHP;
-    public Label targetTHP;
-    public ImageView targetImg;
+    public Label targetTHP= new Label();
+    public ImageView targetImg = new ImageView();
     public void initAttacker(){
         sheet1 = Controller.gamer[Controller.selectedToken];
-        tknName = new Label(sheet1.getSheet().getPlayerName());
+        tknName.setText(sheet1.getSheet().getPlayerName());
+        tknStats.setText("Your stats: " + sheet1.getSheet().getStats().toString() + "\nAC: " + sheet1.getSheet().getAC());
         tknImg = new ImageView(sheet1.getImage());
         tknHP = sheet1.getSheet().getHP();
-        tknTHP = new Label(sheet1.getSheet().getHP() + "/" + tknHP);
+        tknTHP.setText(sheet1.getSheet().getHP() + "/" + tknHP);
     }
     public void initTarget(){
         sheet2 = Controller.gamer[Controller.notSelected];
-
-
-        targetName = new Label(sheet2.getSheet().getPlayerName());
-
+        targetName.setText(sheet2.getSheet().getPlayerName());
+        targetStats.setText("Target stats: " + sheet2.getSheet().getStats().toString()+ "\nAC: " + sheet2.getSheet().getAC());
         targetHP = sheet2.getSheet().getHP();
-        targetTHP = new Label(sheet2.getSheet().getHP() + "/" + targetHP);
-        targetImg = new ImageView(sheet2.getSheet().getPlayerName());
+        targetTHP.setText(sheet2.getSheet().getHP() + "/" + targetHP);
+        targetImg = new ImageView(sheet2.getImage());
     }
     @FXML
     public void initialize() {
