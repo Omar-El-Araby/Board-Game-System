@@ -30,6 +30,8 @@ public class ControllerRegister {
     }
     public void registerClose(MouseEvent mouseEvent) {
         Controller.controllerLogin.register.close();
+        Main.controller.login.show();
+        registerClear();
     }
 
     public void register(ActionEvent actionEvent) {
@@ -42,7 +44,7 @@ public class ControllerRegister {
             JSONArray passwords= reader.getJSONArray("Passwords");
             usernames.put(username);
             passwords.put(password);
-            System.out.println(reader.toString());
+//            System.out.println(reader.toString());
             PrintWriter wrt = new PrintWriter(file);
             wrt.write(reader.toString()+" ");
             wrt.close();
@@ -54,5 +56,13 @@ public class ControllerRegister {
                 "Registered Succesfully",
                 "Register",
                 JOptionPane.INFORMATION_MESSAGE);
+        Controller.controllerLogin.register.hide();
+        User.setCurrentUser(usr.getText());
+        Main.controller.refreshUser();
+        registerClear();
+    }
+    public void registerClear() {
+        usr.clear();
+        pass.clear();
     }
 }

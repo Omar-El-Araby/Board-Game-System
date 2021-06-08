@@ -17,7 +17,6 @@
             <Font name="System Bold" size="12.0" />
          </font></Label>
       <TextField fx:id="usr" layoutX="20.0" layoutY="31.0" />
-      <TextField fx:id="pass" layoutX="20.0" layoutY="86.0" />
       <CheckBox fx:id="rememberme" layoutX="20.0" layoutY="121.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="111.0" text="Remember me">
          <font>
             <Font name="System Bold" size="10.0" />
@@ -34,5 +33,6 @@
             <Image url="@assets/X.png" />
          </image>
       </ImageView>
+      <PasswordField fx:id="pass" layoutX="20.0" layoutY="85.0" />
    </children>
 </AnchorPane>

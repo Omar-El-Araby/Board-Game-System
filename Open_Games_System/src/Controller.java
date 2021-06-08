@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -60,6 +61,8 @@ public class Controller {
     public void initialize() throws IOException {
         login.initStyle(StageStyle.UNDECORATED);
         login.setResizable(false);
+        login.initOwner(Main.mainStage);
+        login.initModality(Modality.WINDOW_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = loader.load();
         controllerLogin = loader.getController();
@@ -158,6 +161,7 @@ public class Controller {
 
 
     public void snek(ActionEvent actionEvent) {
+        System.out.println("Init Snek.");
         Image bg = new Image("file:src/assets/Snake_ladder_BG.jpg");
         Main.mainStage.hide();
         Stage snekStage = new Stage();
@@ -170,8 +174,8 @@ public class Controller {
         playerX.setPosition(gridO.getTile(0));
         MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
         MovementSnakeLadder suffering = new MovementSnakeLadder(playerX);
-        System.out.println("X: "+playerO.getX()+"\tY: "+playerO.getY());
-        System.out.println("X: "+playerX.getX()+"\tY: "+playerX.getY());
+//        System.out.println("X: "+playerO.getX()+"\tY: "+playerO.getY());
+//        System.out.println("X: "+playerX.getX()+"\tY: "+playerX.getY());
         /*gridO.setTile(7,new TeleportTile(gridO.getTile(7), gridO.getTile(13)));
         gridX.setTile(7,new TeleportTile(gridO.getTile(7), gridO.getTile(13)));
         gridO.setTile(15,new TeleportTile(gridO.getTile(15), gridO.getTile(1)));
@@ -239,11 +243,11 @@ public class Controller {
                             flag = false;
                         }
                         if(flag) {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+//                            try {                             //Wait between player roll and CPU roll
+//                                Thread.sleep(1000);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
                             roll = Dice.roll(6);
                             if(gridX.getPosition()+roll>99)
                             {   JOptionPane.showMessageDialog(null,
@@ -408,7 +412,8 @@ public class Controller {
 
     public void stats(ActionEvent actionEvent) {
         JOptionPane.showMessageDialog(null,
-                "Wins: " + User.getWin() + "\nLosses: " + User.getLoss(),
+                "Snakes and Ladders:\n" +
+                        "Wins: " + User.getWin() + "\nLosses: " + User.getLoss(),
                 "Stats",
                 JOptionPane.INFORMATION_MESSAGE);
     }
