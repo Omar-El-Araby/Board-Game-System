@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -59,6 +60,8 @@ public class Controller {
     public void initialize() throws IOException {
         login.initStyle(StageStyle.UNDECORATED);
         login.setResizable(false);
+        login.initOwner(Main.mainStage);
+        login.initModality(Modality.WINDOW_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = loader.load();
         controllerLogin = loader.getController();

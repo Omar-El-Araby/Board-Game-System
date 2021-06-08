@@ -5,11 +5,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -26,6 +28,8 @@ public class ControllerLogin {
     public void initialize() throws IOException {
         register.initStyle(StageStyle.UNDECORATED);
         register.setResizable(false);
+        register.initOwner(Main.mainStage);
+        register.initModality(Modality.WINDOW_MODAL);
         Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
         register.setTitle("Login");
         register.setScene(new Scene(root));
@@ -33,6 +37,8 @@ public class ControllerLogin {
 
     public void register(MouseEvent mouseEvent) {
         register.show();
+        loginClear();
+        Main.controller.login.hide();
     }
 
     public void login(ActionEvent actionEvent) {
@@ -57,25 +63,30 @@ public class ControllerLogin {
                 User.setCurrentUser(usr.getText());
                 Main.controller.refreshUser();
                 Main.controller.login.hide();
-                flag=true;
-            }
-            if(usr.getText().equals(reader.getString("Admin"))&&pass.getText().equals(reader.getString("Admin_Passwords")))
-            {
-                JOptionPane.showMessageDialog(null,
-                        "Admin Login Successful",
-                        "Login",
-                        JOptionPane.INFORMATION_MESSAGE);
-                User.setCurrentUser(usr.getText());
-                Main.controller.refreshUser();
-                Main.controller.login.hide();
+                User.setRememberme(rememberme.isSelected());
+                loginClear();
                 flag=true;
             }
         }
-        if(!flag)
+        if(usr.getText().equals(reader.getString("Admin"))&&pass.getText().equals(reader.getString("Admin_Passwords")))
+        {
+            JOptionPane.showMessageDialog(null,
+                    "Admin Login Successful",
+                    "Login",
+                    JOptionPane.INFORMATION_MESSAGE);
+            User.setCurrentUser(usr.getText());
+            Main.controller.refreshUser();
+            Main.controller.login.hide();
+            User.setRememberme(rememberme.isSelected());
+            loginClear();
+            flag=true;
+        }
+        if(!flag) {
             JOptionPane.showMessageDialog(null,
                     "Login failed check password or username",
                     "Login",
                     JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private double xOffset = 0, yOffset = 0;    //For dragging the window.
@@ -92,5 +103,11 @@ public class ControllerLogin {
 
     public void loginClose(MouseEvent mouseEvent) {
         Main.controller.login.close();
+        loginClear();
+    }
+
+    public void loginClear() {
+        usr.clear();
+        pass.clear();
     }
 }
