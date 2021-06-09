@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane onMouseDragged="#bgOnMouseDragged" onMousePressed="#bgOnMousePressed" prefHeight="368.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerAttack">
+   <children>
+      <Label layoutX="147.0" text="The Attack MENU!!!!!!!" />
+      <Label layoutX="14.0" layoutY="48.0" text="You : " />
+      <ImageView fx:id="tknImg" fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="tknName" layoutX="56.0" layoutY="48.0" text="Name" />
+      <Label layoutX="14.0" layoutY="186.0" text="Target : " />
+      <Label fx:id="targetName" layoutX="58.0" layoutY="186.0" text="TName" />
+      <ImageView fx:id="targetImg" fitHeight="150.0" fitWidth="217.0" layoutX="194.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="14.0" layoutY="77.0" text="HP : " />
+      <Label fx:id="tknTHP" layoutX="47.0" layoutY="78.0" text="yourhp" />
+      <Label layoutX="14.0" layoutY="215.0" text="HP : " />
+      <Label fx:id="targetTHP" layoutX="50.0" layoutY="216.0" text="targethp" />
+      <Button layoutX="10.0" layoutY="319.0" mnemonicParsing="false" text="Switch" onMouseClicked="#Switch" />
+      <Button layoutX="77.0" layoutY="319.0" mnemonicParsing="false" text="Attack" onMouseClicked="#Attack" />
+      <Label layoutX="13.0" layoutY="108.0" text="Your Stats: " />
+      <Label layoutX="13.0" layoutY="245.0" text="Target Stats:" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="384.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#attackClose">
+         <image>
+            <Image url="@assets/X.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

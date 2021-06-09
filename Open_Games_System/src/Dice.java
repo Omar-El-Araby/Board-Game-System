@@ -10,12 +10,7 @@ public final class Dice {
         seed = new Random(n);
     }
     public static int roll(int d){
-        int roll = seed.nextInt(d);
-        JOptionPane.showMessageDialog(null,
-                roll,
-                "Dice",
-                JOptionPane.INFORMATION_MESSAGE);
-        return roll;
+        return seed.nextInt(d) + 1;
     }
     public static int addedRoll(int d, int bonus){
         return roll(d) + bonus;

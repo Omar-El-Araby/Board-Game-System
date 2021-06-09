@@ -3,11 +3,10 @@ public class MovementSnakeLadder extends Movement{
 //    public boolean reverseflagY = true;
 //    public int limitX;
 //    public int limitY;
-
+    public MovementSnakeLadder(){}
     public MovementSnakeLadder(Token token){
         super(token);
-        this.toX = token.getX();
-        this.toY = token.getY();
+
 //        toggleX = false;
 //        toggleY = true;
     }
@@ -53,21 +52,21 @@ public class MovementSnakeLadder extends Movement{
     }*/
     public void moveUp() {
         if(currY > 0)
-            currY = currY - getIncrement();
+            currY = currY - getIncrementY();
     }
     public void moveDown() {
-        if(currY < Main.resolution - getIncrement())
-            currY = currY + getIncrement();
+        if(currY < Main.resolutionY - getIncrementY())
+            currY = currY + getIncrementY();
     }
     public void moveRight() {
-        if(currX < Main.resolution - getIncrement())
-            currX = currX + getIncrement();
+        if(currX < Main.resolutionX - getIncrementX())
+            currX = currX + getIncrementX();
 //        toX += 80;
 //        Main.wait(150);
     }
     public void moveLeft() {
         if(currX > 0)
-            currX = currX - getIncrement();
+            currX = currX - getIncrementX();
     }
     public void nextTile(Tile tile) {
         this.toX = tile.getX();

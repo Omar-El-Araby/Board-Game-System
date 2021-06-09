@@ -23,6 +23,7 @@ public class TeleportTile extends Tile{
         }
         else return super.getPosition();
     }
+    public TeleportTile(){}
     public TeleportTile(int x, int y, int position){
         super(x, y, position);
     }
