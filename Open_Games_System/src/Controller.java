@@ -39,9 +39,11 @@ public class Controller {
     Token playerX = new Token(0,0,new Image("file:src/assets/X.png"));
     SnakeLadderGrid gridO = new SnakeLadderGrid(10,10,Main.resolutionSnakeX,Main.resolutionSnakeY);
     SnakeLadderGrid gridX = new SnakeLadderGrid(10,10,Main.resolutionSnakeX,Main.resolutionSnakeY);
-    Canvas canvas = new Canvas(Main.resolutionSnakeX,Main.resolutionSnakeY);
+    Canvas canvasDND = new Canvas(Main.resolutionX,Main.resolutionY);
+    Canvas canvasSnek = new Canvas(Main.resolutionSnakeX,Main.resolutionSnakeY);
 //    MovementSnakeLadder pain = new MovementSnakeLadder(playerO);
-    GraphicsContext gc = canvas.getGraphicsContext2D();
+    GraphicsContext gcDND = canvasDND.getGraphicsContext2D();
+    GraphicsContext gcSnek = canvasSnek.getGraphicsContext2D();
 
     boolean playerFlag = true;
     boolean singlePlayer = true;
@@ -139,7 +141,7 @@ public class Controller {
                 }
             }
         };
-        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        canvasDND.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 MouseMonitor.getPos(event);
@@ -150,7 +152,7 @@ public class Controller {
         });
         //Thread animation = new Thread(new Animator(gc, bg, test,mover));
 
-        Thread animation = new Thread(new Animator(gc, bg, gamer[0], gamer[1], mover[0], mover[1],2));
+        Thread animation = new Thread(new Animator(gcDND, bg, gamer[0], gamer[1], mover[0], mover[1],2));
         animation.start();
 //        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1, 2));
 
@@ -158,10 +160,10 @@ public class Controller {
         double x, y;
 
 
-        Group root = new Group(canvas);
+        Group root = new Group(canvasDND);
         Scene scene = new Scene(root);
-        x = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) * 0.1;
-        y = bounds.getMinY() + (bounds.getHeight() - scene.getHeight()) * 0.1;
+        x = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) * 0.03;
+        y = bounds.getMinY() + (bounds.getHeight() - scene.getHeight()) * 0.03;
         scene.addEventHandler(KeyEvent.KEY_TYPED, movent);
         DNDStage.setX(x);
         DNDStage.setY(y);
@@ -382,10 +384,10 @@ public class Controller {
             }
         };
 
-        Thread animation = new Thread(new Animator(gc, bg, playerO, playerX, pain, suffering, 1));
+        Thread animation = new Thread(new Animator(gcSnek, bg, playerO, playerX, pain, suffering, 1));
         animation.start();
 
-        Group root = new Group(canvas);
+        Group root = new Group(canvasSnek);
         Scene scene = new Scene(root);
         scene.addEventHandler(KeyEvent.KEY_TYPED, movent);
         snekStage.setTitle("Main Menu");
