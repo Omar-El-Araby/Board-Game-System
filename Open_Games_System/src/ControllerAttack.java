@@ -44,12 +44,15 @@ public class ControllerAttack {
                 Combat.Weapon.Attack(sheet1,sheet2),
                 "Your Roll",
                 JOptionPane.INFORMATION_MESSAGE);
-        initialize();
+        init();
     }
     @FXML
     public void Switch() {
         Controller.DNDSwitchTokens();
-        initialize();
+        int temp = tknHP;
+        tknHP = targetHP;
+        targetHP = temp;
+        init();
     }
 
     public void init() {

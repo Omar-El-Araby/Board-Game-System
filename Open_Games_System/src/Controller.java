@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -149,13 +151,20 @@ public class Controller {
         //Thread animation = new Thread(new Animator(gc, bg, test,mover));
 
         Thread animation = new Thread(new Animator(gc, bg, gamer[0], gamer[1], mover[0], mover[1],2));
-
+        animation.start();
 //        Thread animation = new Thread(new Animator(gc, bg, test, test1, mover, mover1, 2));
 
-        animation.start();
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+        double x, y;
+
+
         Group root = new Group(canvas);
         Scene scene = new Scene(root);
+        x = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) * 0.1;
+        y = bounds.getMinY() + (bounds.getHeight() - scene.getHeight()) * 0.1;
         scene.addEventHandler(KeyEvent.KEY_TYPED, movent);
+        DNDStage.setX(x);
+        DNDStage.setY(y);
         DNDStage.setTitle("Main Menu");
         DNDStage.setScene(scene);
         DNDStage.show();
@@ -165,9 +174,14 @@ public class Controller {
         attackStage.setResizable(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AttackMenu.fxml"));
         Parent rootAttack = loader.load();
+        Scene sceneAttack = new Scene(rootAttack);
+        x = bounds.getMinX() + (bounds.getWidth() - sceneAttack.getWidth()) * 0.65;
+        y = bounds.getMinY() + (bounds.getHeight() - sceneAttack.getHeight()) * 0.2;
         controllerAttack = loader.getController();
+        attackStage.setX(x);
+        attackStage.setY(y);
         attackStage.setTitle("Attack Menu");
-        attackStage.setScene(new Scene(rootAttack));
+        attackStage.setScene(sceneAttack);
         attackStage.show();
     }
 

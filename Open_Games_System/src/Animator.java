@@ -91,8 +91,8 @@ public class Animator implements Runnable{
             gc.drawImage(tkn2.getImage(), mv2.moveX(), mv2.moveY(), Main.width,  Main.height);
             aniDnd.start();
             JOptionPane.showMessageDialog(null,
-                    "Click anywhere with your mouse or use WASD to move around.\nPress F to attack, or spacebar to switch characters." +
-                            "\nMost importantly, enjoy yourself and have fun!",
+                    "'I reject your reality and substitute my own.' - Some guy." +
+                            "\nEnjoy yourself and have fun!",
                     "Welcome to the DnD",
                     JOptionPane.INFORMATION_MESSAGE);
         }
