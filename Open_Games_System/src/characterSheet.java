@@ -67,11 +67,11 @@ public class characterSheet implements Sheet {
 
     }
 
-    public static void main(String[] args) throws Exception {
-        characterSheet pl = new characterSheet("Dragonborn",new Integer[]{3,4,8,5,1,100},1,"src/stats/charactersheet.json");
-        System.out.println(pl.getStatMod()[0]);
-        characterSheet temp = new characterSheet();
-    }
+//    public static void main(String[] args) throws Exception {
+//        characterSheet pl = new characterSheet("Dragonborn",new Integer[]{3,4,8,5,1,100},1,"src/stats/charactersheet.json");
+//        System.out.println(pl.getStatMod()[0]);
+//        characterSheet temp = new characterSheet();
+//    }
     public void update()
     {
 

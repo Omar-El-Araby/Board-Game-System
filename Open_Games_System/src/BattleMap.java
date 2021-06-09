@@ -1,3 +1,5 @@
+import javafx.stage.Screen;
+
 public final class BattleMap extends Grid{
     private static int x = Main.divX; //all movements that use battlemap should have the same grid
     private static int y = Main.divY;
@@ -76,10 +78,10 @@ public final class BattleMap extends Grid{
         moveTileX(1);
         //System.out.printf("post-PositionX: %d\t",position[0]);
     }
-    public static void main(String[] args) {
-        BattleMap map = new BattleMap(1920,1080);
-        System.out.printf("positionX: %d\tpositionY: %d",map.position[0],map.position[1]);
-        System.out.printf("up: %d,%d\tdown: %d,%d\tleft: %d,%d\tright: %d,%d\n",map.getTileUp().getX(),map.getTileUp().getY(),map.getTileDown().getX(),map.getTileDown().getY(),map.getTileLeft().getX(),map.getTileLeft().getY(),map.getTileRight().getX(),map.getTileRight().getY());
-        map.checkTiles();
-    }
+//    public static void main(String[] args) {
+//        BattleMap map = new BattleMap(1920,1080);
+//        System.out.printf("positionX: %d\tpositionY: %d",map.position[0],map.position[1]);
+//        System.out.printf("up: %d,%d\tdown: %d,%d\tleft: %d,%d\tright: %d,%d\n",map.getTileUp().getX(),map.getTileUp().getY(),map.getTileDown().getX(),map.getTileDown().getY(),map.getTileLeft().getX(),map.getTileLeft().getY(),map.getTileRight().getX(),map.getTileRight().getY());
+//        map.checkTiles();
+//    }
 }
